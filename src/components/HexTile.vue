@@ -1,6 +1,6 @@
 <template>
   <div class="hex">
-    <Stone player="stone"></Stone>
+    <Stone :player="stone"></Stone>
   </div>
 </template>
 
