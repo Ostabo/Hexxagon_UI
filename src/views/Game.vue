@@ -1,5 +1,4 @@
 <template>
-  <RouterLink class="router-link" to="/about">ABOUT</RouterLink>
 </template>
 
 <script>

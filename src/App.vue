@@ -5,5 +5,5 @@ import { RouterView } from "vue-router";</script>
   <RouterView />
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 </style>
