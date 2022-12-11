@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Game from "@/views/Game.vue";
 import Menu from "@/views/Menu.vue";
 
 const router = createRouter({
@@ -13,12 +12,12 @@ const router = createRouter({
     {
       path: "/singleplayer",
       name: "singleplayer",
-      component: Game,
+      component: Menu, // not implemented yet
     },
     {
       path: "/multiplayer",
       name: "multiplayer",
-      component: Game,
+      component: () => import("../views/Game.vue"),
     },
     {
       path: "/about",

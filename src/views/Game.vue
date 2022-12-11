@@ -1,6 +1,7 @@
 <template>
-  <main v-if="!loading" class="container">
-    <div class="header">
+  <Loading v-if="loading"></Loading>
+  <main v-else class="container">
+    <!--<div class="header">
       <h2 class="counter">
         <Stone player="1"></Stone>
         :
@@ -14,7 +15,7 @@
         :
         <span>{{ counter2 }}</span>
       </h2>
-    </div>
+    </div>-->
     <div v-for="(row, indexR) in game"
          :key="row"
          class="row">
@@ -25,13 +26,12 @@
                @click="clickTile(indexR, indexT)"></HexTile>
     </div>
   </main>
-  <Loading v-if="loading"></Loading>
 </template>
 
 <script>
 import HexTile from "@/components/HexTile.vue";
 import Stone from "@/components/Stone.vue";
-import { FieldResponse } from "@/assets/classes";
+import { Field, FieldResponse } from "@/assets/classes";
 import Loading from "@/components/Loading.vue";
 
 export const statusText = [
@@ -44,33 +44,51 @@ export const WS_PLAYER_REQUEST = "Requesting player number";
 export const WS_PLAYER_RESPONSE = "Player number: ";
 export const WS_KEEP_ALIVE_RESPONSE = "Keep alive";
 export const WS_KEEP_ALIVE_REQUEST = "ping";
-export const SERVER_URL = "ws://localhost:9000";
-
-let socket = new WebSocket(SERVER_URL + "/ws");
+export const SERVER_URL = "localhost:9000";
 
 export default {
   name: "Game",
   components: { Loading, Stone, HexTile },
-  data: () => {
+  data() {
     return {
+      socket: undefined,
       loading: true,
       counter1: 0,
       counter2: 0,
-      gameStatus: statusText[2],
-      playerNumber: "",
-      game: []
+      gameStatus: "",
+      playerNumber: String,
+      game: new Field(0, 0, [])
     };
   },
-  beforeCreate() {
-    socket.onopen = () => {
-      console.log("WebSocket connection established");
-      socket.send(WS_PLAYER_REQUEST);
+  mounted() {
+    fetch("http://" + SERVER_URL + "/game", {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+      }
+    }).then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        throw new Error("Something went wrong");
+      }
+    }).then(json => {
+      this.updateGame(json);
+    }).catch(err => {
+      console.log(err);
+    });
 
-      setInterval(() => socket.send(WS_KEEP_ALIVE_REQUEST), 20000); // ping every 20 seconds
-      this.loading = false;
+    this.socket = new WebSocket("ws://" + SERVER_URL + "/ws");
+    console.log(this.socket);
+
+    this.socket.onopen = () => {
+      console.log("WebSocket connection established");
+      this.socket.send(WS_PLAYER_REQUEST);
+
+      setInterval(() => this.socket.send(WS_KEEP_ALIVE_REQUEST), 20000); // ping every 20 seconds
     };
 
-    socket.onmessage = (event) => {
+    this.socket.onmessage = (event) => {
       let msg = event.data;
 
       if (msg.startsWith(WS_PLAYER_RESPONSE)) {
@@ -85,7 +103,7 @@ export default {
       }
     };
 
-    socket.onclose = (event) => {
+    this.socket.onclose = (event) => {
       if (event.wasClean) {
         console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
       } else {
@@ -93,9 +111,13 @@ export default {
       }
     };
 
-    socket.onerror = (error) => {
+    this.socket.onerror = (error) => {
       console.error(`[error] ${error.message}`);
     };
+  },
+  beforeUnmount() {
+    if (this.socket)
+      this.socket.close();
   },
   methods: {
     clickTile: async function(element) {
@@ -123,12 +145,12 @@ export default {
       });
 
       if (res.ok)
-        socket.send(`Action done: ${action} -> Response: ${await res.text()}`);
+        this.socket.send(`Action done: ${action} -> Response: ${await res.text()}`);
       else
         this.triggerToast(await res.text());
     },
 
-    updateGame: (fieldRes) => {
+    updateGame: function (fieldRes) {
       // update the page
       this.updateCounter(fieldRes);
       // only update status for playing users
@@ -141,13 +163,13 @@ export default {
       const c2 = fieldRes.ocount;
 
       // Game over or new game
-      if (c1 + c2 === this.$refs.hex.length) {
+      if (c1 + c2 === this.$refs.hex?.length) {
         this.gameOver();
         this.updateStatus(0);
       }
     },
 
-    gameOver: () => {
+    gameOver: function () {
       //const content = $("#game-over-content");
 
       //if (counter1 > counter2)
@@ -160,7 +182,7 @@ export default {
       //$("#gameOverModal").modal("show");
     },
 
-    initStatus: () => {
+    initStatus: function () {
       switch (this.playerNumber) {
         case "1": // player 1 always starts <- bad
           this.gameStatus = statusText[1];
@@ -174,7 +196,7 @@ export default {
       }
     },
 
-    updateStatus: (turn) => {
+    updateStatus: function (turn) {
       switch (turn.toString()) {
         case "0": // game over
           this.gameStatus = statusText[0];
@@ -188,17 +210,17 @@ export default {
       }
     },
 
-    updateCounter: (json) => {
+    updateCounter: function (json) {
       // update the page elements
       this.counter1 = json.xcount;
       this.counter2 = json.ocount;
     },
 
-    updateField: (json) => {
-      this.game = json.field.cells;
+    updateField: function (json) {
+      this.game = new Field(json.field.rows, json.field.cols, json.field.cells);
     },
 
-    triggerToast: (msg) => {
+    triggerToast: function (msg) {
       //$("#toast-msg").text(msg);
       //const toast = new bootstrap.Toast($("#liveToast"));
       //toast.show();
