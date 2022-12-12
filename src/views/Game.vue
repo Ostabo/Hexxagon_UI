@@ -16,15 +16,12 @@
         <span>{{ counter2 }}</span>
       </h2>
     </div>
-    <!--<div v-for="(row, indexR) in game"
-         :key="row"
-         class="row">
-      <HexTile v-for="(tile, indexT) in row"
-               :key="tile"
-               ref="hex"
-               :stone="tile"
-               @click="clickTile(indexR, indexT)"></HexTile>
-    </div>-->
+    <div v-for="row in 9"
+          :key="row"
+          class="row">
+        <TileRow :row="row">
+        </TileRow>
+    </div>
   </main>
 </template>
 
@@ -33,6 +30,7 @@ import HexTile from "@/components/HexTile.vue";
 import Stone from "@/components/Stone.vue";
 import { Field, FieldResponse } from "@/assets/classes";
 import Loading from "@/components/Loading.vue";
+import TileRow from "@/components/TileRow.vue";
 
 export const statusText = [
   "GAME OVER",
@@ -48,7 +46,7 @@ export const SERVER_URL = "localhost:9000";
 
 export default {
   name: "Game",
-  components: { Loading, Stone, HexTile },
+  components: { Loading, Stone, HexTile, TileRow },
   data() {
     return {
       socket: undefined,
@@ -121,17 +119,6 @@ export default {
   },
   methods: {
     clickTile: async function(element) {
-      switch (this.playerNumber) {
-        case "1":
-        case "2":
-          const availableTurns = ["X", "O"];
-          const [x, y] = element.id.toString().split(",");
-          const req = `/place/${x}/${y}/${availableTurns[this.playerNumber - 1]}`;
-          await this.doAction(req);
-          break;
-        default:
-          this.triggerToast(statusText[3]);
-      }
     },
 
     doAction: async function(action) {
@@ -230,5 +217,15 @@ export default {
 </script>
 
 <style scoped>
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
+  .status {
+    padding: 0 2.5em;
+    font-family: Hexa, serif;
+  }
 </style>
