@@ -1,32 +1,36 @@
 <template>
   <Loading v-if="loading"></Loading>
   <div v-else class="container">
-    <WebFrame>
-      <h1 class="p-3">Welcome to Hexxagon!</h1>
-      <div class="game-container">
-        <div class="header">
-          <h2 class="counter">
-            <Stone :player="1"></Stone>
-            :
-            <span>{{ counter1 }}</span>
-          </h2>
-          <h2 class="status">
-            {{ gameStatus }}
-          </h2>
-          <h2 class="counter">
-            <Stone :player="2"></Stone>
-            :
-            <span>{{ counter2 }}</span>
-          </h2>
-        </div>
-        <div v-for="row in 6"
-             :key="row"
-             class="row">
-          <TileRow :row="row">
-          </TileRow>
+    <h1 class="p-3">Welcome to Hexxagon!</h1>
+    <div class="game-container">
+      <div class="header">
+        <h2 class="counter">
+          <Stone :player="'X'"></Stone>
+          :
+          <span>{{ counter1 }}</span>
+        </h2>
+        <h2 class="status">
+          {{ gameStatus }}
+        </h2>
+        <h2 class="counter">
+          <Stone :player="'O'"></Stone>
+          :
+          <span>{{ counter2 }}</span>
+        </h2>
+      </div>
+      <div v-for="rowInd in game.field.rows"
+           :key="rowInd"
+           class="row">
+        <div class="tileRow">
+          <HexTile v-for="colInd in game.field.cols"
+                   :key="colInd"
+                   ref="hex"
+                   :stone="getCell(rowInd, colInd)"
+                   @click="clickTile(rowInd, colInd)">
+          </HexTile>
         </div>
       </div>
-    </WebFrame>
+    </div>
   </div>
 </template>
 
@@ -35,7 +39,6 @@ import HexTile from "@/components/HexTile.vue";
 import Stone from "@/components/Stone.vue";
 import { Field, FieldResponse } from "@/assets/classes";
 import Loading from "@/components/Loading.vue";
-import TileRow from "@/components/TileRow.vue";
 import WebFrame from "@/views/WebFrame.vue";
 
 export const statusText = [
@@ -52,16 +55,16 @@ export const SERVER_URL = "localhost:9000";
 
 export default {
   name: "Game",
-  components: {WebFrame, Loading, Stone, HexTile, TileRow },
+  components: { WebFrame, Loading, Stone, HexTile },
   data() {
     return {
       socket: undefined,
       loading: Boolean,
-      counter1: Number,
-      counter2: Number,
+      counter1: String,
+      counter2: String,
       gameStatus: String,
       playerNumber: String,
-      game: new Field(1, 1, [])
+      game: undefined
     };
   },
   mounted() {
@@ -124,7 +127,17 @@ export default {
       this.socket.close();
   },
   methods: {
-    clickTile: async function(element) {
+    clickTile: async function(row, col) {
+      switch (this.playerNumber) {
+        case "1":
+        case "2":
+          const availableTurns = ["X", "O"];
+          const req = `http://${SERVER_URL}/place/${col}/${row}/${availableTurns[this.playerNumber - 1]}`;
+          await this.doAction(req);
+          break;
+        default:
+          this.triggerToast(statusText[3]);
+      }
     },
 
     doAction: async function(action) {
@@ -175,6 +188,11 @@ export default {
       //$("#gameOverModal").modal("show");
     },
 
+    getCell: function(row, col) {
+      const cell = this.game.field.cells.find(cell => cell.row === row && cell.col === col);
+      return cell?.cell ? cell.cell : " ";
+    },
+
     initStatus: function() {
       switch (this.playerNumber) {
         case "1": // player 1 always starts <- bad
@@ -210,7 +228,7 @@ export default {
     },
 
     updateField: function(json) {
-      this.game = new Field(json.field.rows, json.field.cols, json.field.cells);
+      this.game = Field.from(json);
     },
 
     triggerToast: function(msg) {
@@ -222,25 +240,34 @@ export default {
 };
 </script>
 
-<style scoped>
-  .game-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+<style lang="scss" scoped>
+@use "sass:math";
 
-  .status {
-    padding: 0 2.5em;
-    font-family: Hexa, serif;
-  }
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-  .header {
-    font-size: 2rem;
-    display: flex;
-    align-content: center;
-    justify-content: space-between;
-    min-width: 50%;
-    margin-bottom: 2em;
-  }
+.status {
+  padding: 0 2.5em;
+  font-family: Hexa, serif;
+}
+
+.header {
+  font-size: 2rem;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  min-width: 50%;
+  margin-bottom: 2em;
+}
+
+.tileRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: math.div(8vmin, 8);
+}
 </style>

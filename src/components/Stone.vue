@@ -1,7 +1,7 @@
 <template>
   <div class="stone">
-    <font-awesome-icon v-if="player===1" :size="'1x'" icon="fa-solid fa-gem" />
-    <font-awesome-icon v-else-if="player===2" :size="'1x'" icon="fa-regular fa-gem" />
+    <font-awesome-icon v-if="player==='X'" :size="'1x'" icon="fa-solid fa-gem" />
+    <font-awesome-icon v-if="player==='O'" :size="'1x'" icon="fa-regular fa-gem" />
   </div>
 </template>
 
@@ -10,7 +10,7 @@ export default {
   name: "Stone",
   props: {
     player: {
-      type: Number,
+      type: String,
       required: true
     }
   }
