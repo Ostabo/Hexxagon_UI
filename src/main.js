@@ -12,7 +12,8 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 /* import specific icons */
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faGear, faInfo, faSpinner, faVolumeHigh, faVolumeXmark } from "@fortawesome/free-solid-svg-icons";
+import { faGear, faGem, faInfo, faSpinner, faVolumeHigh, faVolumeXmark } from "@fortawesome/free-solid-svg-icons";
+import { faGem as fG } from "@fortawesome/free-regular-svg-icons";
 
 /* add icons to the library */
 library.add(faGithub);
@@ -21,6 +22,8 @@ library.add(faVolumeXmark);
 library.add(faGear);
 library.add(faInfo);
 library.add(faSpinner);
+library.add(faGem);
+library.add(fG);
 
 const app = createApp(App);
 

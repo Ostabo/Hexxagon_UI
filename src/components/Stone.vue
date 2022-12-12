@@ -10,7 +10,7 @@ export default {
   name: "Stone",
   props: {
     player: {
-      type: 1 | 2,
+      type: Number,
       required: true
     }
   }

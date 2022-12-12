@@ -1,9 +1,9 @@
 <template>
   <Loading v-if="loading"></Loading>
   <main v-else class="container">
-    <!--<div class="header">
+    <div class="header">
       <h2 class="counter">
-        <Stone player="1"></Stone>
+        <Stone :player="1"></Stone>
         :
         <span>{{ counter1 }}</span>
       </h2>
@@ -11,12 +11,12 @@
         {{ gameStatus }}
       </h2>
       <h2 class="counter">
-        <Stone player="2"></Stone>
+        <Stone :player="2"></Stone>
         :
         <span>{{ counter2 }}</span>
       </h2>
-    </div>-->
-    <div v-for="(row, indexR) in game"
+    </div>
+    <!--<div v-for="(row, indexR) in game"
          :key="row"
          class="row">
       <HexTile v-for="(tile, indexT) in row"
@@ -24,7 +24,7 @@
                ref="hex"
                :stone="tile"
                @click="clickTile(indexR, indexT)"></HexTile>
-    </div>
+    </div>-->
   </main>
 </template>
 
@@ -52,19 +52,19 @@ export default {
   data() {
     return {
       socket: undefined,
-      loading: true,
-      counter1: 0,
-      counter2: 0,
-      gameStatus: "",
+      loading: Boolean,
+      counter1: Number,
+      counter2: Number,
+      gameStatus: String,
       playerNumber: String,
-      game: new Field(0, 0, [])
+      game: new Field(1, 1, [])
     };
   },
   mounted() {
     fetch("http://" + SERVER_URL + "/game", {
       method: "GET",
       headers: {
-        "Accept": "application/json",
+        "Accept": "application/json"
       }
     }).then(res => {
       if (res.ok) {
@@ -74,12 +74,12 @@ export default {
       }
     }).then(json => {
       this.updateGame(json);
+      this.loading = false;
     }).catch(err => {
       console.log(err);
     });
 
     this.socket = new WebSocket("ws://" + SERVER_URL + "/ws");
-    console.log(this.socket);
 
     this.socket.onopen = () => {
       console.log("WebSocket connection established");
@@ -150,7 +150,7 @@ export default {
         this.triggerToast(await res.text());
     },
 
-    updateGame: function (fieldRes) {
+    updateGame: function(fieldRes) {
       // update the page
       this.updateCounter(fieldRes);
       // only update status for playing users
@@ -169,7 +169,7 @@ export default {
       }
     },
 
-    gameOver: function () {
+    gameOver: function() {
       //const content = $("#game-over-content");
 
       //if (counter1 > counter2)
@@ -182,7 +182,7 @@ export default {
       //$("#gameOverModal").modal("show");
     },
 
-    initStatus: function () {
+    initStatus: function() {
       switch (this.playerNumber) {
         case "1": // player 1 always starts <- bad
           this.gameStatus = statusText[1];
@@ -196,7 +196,7 @@ export default {
       }
     },
 
-    updateStatus: function (turn) {
+    updateStatus: function(turn) {
       switch (turn.toString()) {
         case "0": // game over
           this.gameStatus = statusText[0];
@@ -210,17 +210,17 @@ export default {
       }
     },
 
-    updateCounter: function (json) {
+    updateCounter: function(json) {
       // update the page elements
       this.counter1 = json.xcount;
       this.counter2 = json.ocount;
     },
 
-    updateField: function (json) {
+    updateField: function(json) {
       this.game = new Field(json.field.rows, json.field.cols, json.field.cells);
     },
 
-    triggerToast: function (msg) {
+    triggerToast: function(msg) {
       //$("#toast-msg").text(msg);
       //const toast = new bootstrap.Toast($("#liveToast"));
       //toast.show();
