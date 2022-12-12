@@ -11,7 +11,7 @@
 
 <script>
   import HexTile from "@/components/HexTile.vue";
-  import {Field} from "../assets/classes";
+  import {Field} from "@/assets/classes";
 
   export default {
     name: "TileRow",
@@ -37,10 +37,12 @@
 </script>
 
 <style lang="scss">
+@use "sass:math";
+
   .tileRow {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 8vmin / 8;
+    margin-top: math.div(8vmin, 8);
   }
 </style>

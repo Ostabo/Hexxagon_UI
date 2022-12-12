@@ -1,28 +1,33 @@
 <template>
   <Loading v-if="loading"></Loading>
-  <main v-else class="container">
-    <div class="header">
-      <h2 class="counter">
-        <Stone :player="1"></Stone>
-        :
-        <span>{{ counter1 }}</span>
-      </h2>
-      <h2 class="status">
-        {{ gameStatus }}
-      </h2>
-      <h2 class="counter">
-        <Stone :player="2"></Stone>
-        :
-        <span>{{ counter2 }}</span>
-      </h2>
-    </div>
-    <div v-for="row in 9"
-          :key="row"
-          class="row">
-        <TileRow :row="row">
-        </TileRow>
-    </div>
-  </main>
+  <div v-else class="container">
+    <WebFrame>
+      <h1 class="p-3">Welcome to Hexxagon!</h1>
+      <div class="game-container">
+        <div class="header">
+          <h2 class="counter">
+            <Stone :player="1"></Stone>
+            :
+            <span>{{ counter1 }}</span>
+          </h2>
+          <h2 class="status">
+            {{ gameStatus }}
+          </h2>
+          <h2 class="counter">
+            <Stone :player="2"></Stone>
+            :
+            <span>{{ counter2 }}</span>
+          </h2>
+        </div>
+        <div v-for="row in 6"
+             :key="row"
+             class="row">
+          <TileRow :row="row">
+          </TileRow>
+        </div>
+      </div>
+    </WebFrame>
+  </div>
 </template>
 
 <script>
@@ -31,6 +36,7 @@ import Stone from "@/components/Stone.vue";
 import { Field, FieldResponse } from "@/assets/classes";
 import Loading from "@/components/Loading.vue";
 import TileRow from "@/components/TileRow.vue";
+import WebFrame from "@/views/WebFrame.vue";
 
 export const statusText = [
   "GAME OVER",
@@ -46,7 +52,7 @@ export const SERVER_URL = "localhost:9000";
 
 export default {
   name: "Game",
-  components: { Loading, Stone, HexTile, TileRow },
+  components: {WebFrame, Loading, Stone, HexTile, TileRow },
   data() {
     return {
       socket: undefined,
@@ -217,7 +223,7 @@ export default {
 </script>
 
 <style scoped>
-  .container {
+  .game-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -227,5 +233,14 @@ export default {
   .status {
     padding: 0 2.5em;
     font-family: Hexa, serif;
+  }
+
+  .header {
+    font-size: 2rem;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    min-width: 50%;
+    margin-bottom: 2em;
   }
 </style>
