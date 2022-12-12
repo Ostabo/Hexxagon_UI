@@ -1,37 +1,54 @@
 <template>
   <Loading v-if="loading"></Loading>
-  <div v-else class="container">
-    <h1 class="p-3">Welcome to Hexxagon!</h1>
-    <div class="game-container">
-      <div class="header">
-        <h2 class="counter">
-          <Stone :player="'X'"></Stone>
-          :
-          <span>{{ counter1 }}</span>
-        </h2>
-        <h2 class="status">
-          {{ gameStatus }}
-        </h2>
-        <h2 class="counter">
-          <Stone :player="'O'"></Stone>
-          :
-          <span>{{ counter2 }}</span>
-        </h2>
+  <WebFrame v-else>
+    <div class="container">
+      <h1 class="p-3">Welcome to Hexxagon!</h1>
+      <div class="game-container">
+        <div class="header">
+          <h2 class="counter">
+            <Stone :player="'X'"></Stone>
+            :
+            <span>{{ counter1 }}</span>
+          </h2>
+          <h2 class="status">
+            {{ gameStatus }}
+          </h2>
+          <h2 class="counter">
+            <Stone :player="'O'"></Stone>
+            :
+            <span>{{ counter2 }}</span>
+          </h2>
+        </div>
+        <div v-for="rowInd in game.field.rows"
+             :key="rowInd"
+             class="row">
+          <div class="tileRow">
+            <HexTile v-for="colInd in game.field.cols"
+                     :key="colInd"
+                     ref="hex"
+                     :stone="getCell(rowInd, colInd)"
+                     @click="clickTile(rowInd, colInd)">
+            </HexTile>
+          </div>
+        </div>
       </div>
-      <div v-for="rowInd in game.field.rows"
-           :key="rowInd"
-           class="row">
-        <div class="tileRow">
-          <HexTile v-for="colInd in game.field.cols"
-                   :key="colInd"
-                   ref="hex"
-                   :stone="getCell(rowInd, colInd)"
-                   @click="clickTile(rowInd, colInd)">
-          </HexTile>
+
+      <div class="dropup actionbutton text-capitalize p-4">
+        <button class="btn btn-light dropdown-toggle text-capitalize fs-4" type="button" id="dropdownMenuButton"
+                data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-dpad-fill p-1"></i>
+          actions
+        </button>
+        <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" id="undo" onclick="doAction('undo')">undo</a>
+          <a class="dropdown-item" id="redo" onclick="doAction('redo')">redo</a>
+          <a class="dropdown-item" id="save" data-bs-toggle="modal" data-bs-target="#saveModal">save</a>
+          <a class="dropdown-item" id="load" data-bs-toggle="modal" data-bs-target="#loadModal">load</a>
+          <a class="dropdown-item" id="reset" data-bs-toggle="modal" data-bs-target="#resetModal">reset</a>
         </div>
       </div>
     </div>
-  </div>
+  </WebFrame>
 </template>
 
 <script>

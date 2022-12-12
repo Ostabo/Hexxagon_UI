@@ -49,7 +49,7 @@
             <i class="bi bi-chat"></i>
           </button>
           <div class="dropdown-menu p-0" aria-labelledby="dropdownChat">
-            <!-- <Chat></Chat> -->
+            <!-- Chat -->
           </div>
         </div>
         <div class="dropdown mr-3 my-1">
@@ -58,7 +58,7 @@
           </button>
           <div class="dropdown-menu text-center settings" aria-labelledby="dropdownMenuButton">
             <span>
-              <!-- <Theme></Theme> -->
+              <!-- Theme -->
             </span>
             <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#help">
               <i class="bi bi-question-circle-fill"></i>
@@ -192,3 +192,114 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+@font-face {
+  font-family: Hexa;
+  src: url('src/assets/Hexa.ttf');
+}
+
+.light-theme {
+  .main-body, textarea, footer, nav, a, .dropdown-menu-dark,
+  .modal-content, main, .card:not(:is(section .card)), .toast-container *,
+  #chat {
+    background: rgb(185, 185, 185);
+    color: black;
+  }
+}
+
+.dark-theme {
+  .main-body, textarea, footer, nav, a, .dropdown-menu-dark,
+  .modal-content, main, .card:not(:is(section .card)), .toast-container *,
+  #chat {
+    background: rgba(40, 40, 40, 1);
+    color: white;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: 1s fade-in ease-in;
+}
+
+body.main-body {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  text-align: center;
+  min-height: 100vh;
+
+  nav ul {
+    gap: 1vw;
+  }
+
+  .img-responsive {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  main {
+    min-height: 86.45vh;
+  }
+
+  .settings {
+    min-width: min-content;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .dropdown-item {
+      margin-top: 1vmin;
+    }
+  }
+
+  h1.welcome {
+    font-family: Hexa, serif;
+    font-size: 4em;
+    font-weight: 100;
+    text-shadow: black 0 0 1em;
+  }
+
+  .header {
+    font-size: 2rem;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    min-width: 50%;
+    margin-bottom: 2em;
+  }
+
+  textarea {
+    display: block;
+    min-width: 740px;
+    height: 740px;
+
+    font-size: 1.8em;
+    text-align: left;
+    padding: 1em;
+    border: none;
+    resize: none;
+    outline: none;
+
+    font-family: revert;
+    line-height: initial;
+  }
+}
+
+#game-over {
+  display: none;
+}
+</style>
