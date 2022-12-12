@@ -12,7 +12,7 @@ export default {
   components: { Stone },
   props: {
     stone: {
-      type: 1 | 2,
+      type: Number,
       required: true
     }
   }
