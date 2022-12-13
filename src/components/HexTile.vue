@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Stone from "@/components/Stone.vue";
+import Stone from "@/components/PlayerStone.vue";
 
 export default {
   name: "HexTile",
@@ -13,34 +13,35 @@ export default {
   props: {
     stone: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @use "sass:math";
-  .hex {
-    width: 1.1 * 8vmin;
-    height: 8vmin;
-    background: white;
-    text-shadow: black 0 1.6px 1.6px;
-    text-align: center;
-    line-height: 8vmin;
-    font-size: math.div(8vmin, 2);
-    transition: all .1s linear;
-    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
 
-    margin-left: math.div(-1 * 8vmin, 8);
+.hex {
+  width: 1.1 * 8vmin;
+  height: 8vmin;
+  background: white;
+  text-shadow: black 0 1.6px 1.6px;
+  text-align: center;
+  line-height: 8vmin;
+  font-size: math.div(8vmin, 2);
+  transition: all 0.1s linear;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
 
-    &:nth-child(odd) {
-      margin-top: math.div((8vmin * -1 - 8vmin), 1.75) !important;
-    }
+  margin-left: math.div(-1 * 8vmin, 8);
 
-    &:hover {
-      cursor: pointer;
-      scale: 1.1;
-    }
+  &:nth-child(odd) {
+    margin-top: math.div((8vmin * -1 - 8vmin), 1.75) !important;
   }
+
+  &:hover {
+    cursor: pointer;
+    scale: 1.1;
+  }
+}
 </style>

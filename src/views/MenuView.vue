@@ -6,21 +6,10 @@
     <RouterLink class="router-link" to="/multiplayer">MULTIPLAYER</RouterLink>
     <RouterLink class="router-link" to="/about">ABOUT</RouterLink>
     <div class="menu-button-wrapper">
-      <IconButton
-        icon="fa-solid fa-gear"
-        @click="toggleSettings">
-      </IconButton>
-      <IconButton
-        icon="fa-solid fa-info"
-        @click="toggleAbout">
-      </IconButton>
-      <IconButton
-        icon="fa-brands fa-github"
-        @click="openGithub">
-      </IconButton>
-      <IconButton
-        icon="fa-solid fa-volume-high"
-        @click="soundToggle">
+      <IconButton icon="fa-solid fa-gear" @click="toggleSettings"> </IconButton>
+      <IconButton icon="fa-solid fa-info" @click="toggleAbout"> </IconButton>
+      <IconButton icon="fa-brands fa-github" @click="openGithub"> </IconButton>
+      <IconButton icon="fa-solid fa-volume-high" @click="soundToggle">
       </IconButton>
     </div>
   </div>
@@ -30,24 +19,20 @@
 import IconButton from "@/components/IconButton.vue";
 
 export default {
-  name: "Menu",
+  name: "MenuView",
   components: { IconButton },
   methods: {
-    toggleSettings() {
-    },
-    toggleAbout() {
-    },
+    toggleSettings() {},
+    toggleAbout() {},
     openGithub() {
       window.open("https://github.com/Ostabo/Hexxagon-WA");
     },
-    soundToggle() {
-    }
-  }
+    soundToggle() {},
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-
 @import "../assets/main.scss";
 
 .heading {
@@ -106,5 +91,4 @@ export default {
   justify-content: space-between;
   width: 100%;
 }
-
 </style>

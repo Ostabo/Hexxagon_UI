@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Menu from "@/views/Menu.vue";
+import MenuView from "@/views/MenuView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,17 +7,17 @@ const router = createRouter({
     {
       path: "/",
       name: "menu",
-      component: Menu,
+      component: MenuView,
     },
     {
       path: "/singleplayer",
       name: "singleplayer",
-      component: Menu, // not implemented yet
+      component: MenuView, // not implemented yet
     },
     {
       path: "/multiplayer",
       name: "multiplayer",
-      component: () => import("../views/Game.vue"),
+      component: () => import("../views/GameView.vue"),
     },
     {
       path: "/about",
@@ -25,7 +25,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/About.vue"),
+      component: () => import("../views/AboutPage.vue"),
     },
     {
       path: "/:pathMatch(.*)*",
