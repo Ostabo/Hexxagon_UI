@@ -19,18 +19,18 @@ export default {
   props: {
     player: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   computed: {
     color() {
       return this.player === "X"
-        ? "red"
-        : this.player === "O"
         ? "blue"
-        : "white";
-    },
-  },
+        : this.player === "O"
+          ? "red"
+          : "white";
+    }
+  }
 };
 </script>
 

@@ -19,14 +19,14 @@
             <span>{{ counter2 }}</span>
           </h2>
         </div>
-        <div v-for="rowInd in game.field.rows" :key="rowInd" class="row">
+        <div v-for="rowInd in game.field.rows" :key="rowInd - 1" class="row">
           <div class="tileRow">
             <HexTile
               v-for="colInd in game.field.cols"
-              :key="colInd"
+              :key="colInd - 1"
               ref="hex"
-              :stone="getCell(rowInd, colInd)"
-              @click="clickTile(rowInd, colInd)"
+              :stone="getCell(rowInd - 1, colInd - 1)"
+              @click="clickTile(rowInd - 1, colInd - 1)"
             >
             </HexTile>
           </div>
@@ -55,26 +55,27 @@
             class="dropdown-item"
             data-bs-target="#saveModal"
             data-bs-toggle="modal"
-            >save</a
+          >save</a
           >
           <a
             id="load"
             class="dropdown-item"
             data-bs-target="#loadModal"
             data-bs-toggle="modal"
-            >load</a
+          >load</a
           >
           <a
             id="reset"
             class="dropdown-item"
             data-bs-target="#resetModal"
             data-bs-toggle="modal"
-            >reset</a
+          >reset</a
           >
         </div>
       </div>
     </div>
   </WebFrame>
+  <ResetModal></ResetModal>
 </template>
 
 <script>
@@ -83,13 +84,14 @@ import PlayerStone from "@/components/PlayerStone.vue";
 import { Field } from "@/assets/classes";
 import LoadingIcon from "@/components/LoadingIcon.vue";
 import WebFrame from "@/views/WebFrame.vue";
+import ResetModal from "@/components/ResetModal.vue";
 
 export const availableTurns = ["X", "O"];
 export const statusText = [
   "GAME OVER",
   "Your turn",
   "Waiting for other player...",
-  "You are spectator",
+  "You are spectator"
 ];
 export const WS_PLAYER_REQUEST = "Requesting player number";
 export const WS_PLAYER_RESPONSE = "Player number: ";
@@ -99,7 +101,7 @@ export const SERVER_URL = "localhost:9000";
 
 export default {
   name: "GameView",
-  components: { WebFrame, LoadingIcon, PlayerStone, HexTile },
+  components: { ResetModal, WebFrame, LoadingIcon, PlayerStone, HexTile },
   data() {
     return {
       socket: undefined,
@@ -108,15 +110,15 @@ export default {
       counter2: String,
       gameStatus: String,
       playerNumber: String,
-      game: undefined,
+      game: undefined
     };
   },
   mounted() {
     fetch("http://" + SERVER_URL + "/game", {
       method: "GET",
       headers: {
-        Accept: "application/json",
-      },
+        Accept: "application/json"
+      }
     })
       .then((res) => {
         if (res.ok) {
@@ -175,7 +177,23 @@ export default {
     if (this.socket) this.socket.close();
   },
   methods: {
-    clickTile: async function (row, col) {
+    doAction: async function(action) {
+      const res = await fetch(action, {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json"
+        },
+        body: ""
+      });
+
+      if (res.ok)
+        this.socket.send(
+          `Action done: ${action} -> Response: ${await res.text()}`
+        );
+      else this.triggerToast(await res.text());
+    },
+    clickTile: async function(row, col) {
       switch (this.playerNumber) {
         case "1":
         case "2":
@@ -190,24 +208,7 @@ export default {
       }
     },
 
-    doAction: async function (action) {
-      const res = await fetch(action, {
-        method: "POST",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-        body: "",
-      });
-
-      if (res.ok)
-        this.socket.send(
-          `Action done: ${action} -> Response: ${await res.text()}`
-        );
-      else this.triggerToast(await res.text());
-    },
-
-    updateGame: function (fieldRes) {
+    updateGame: function(fieldRes) {
       // update the page
       this.updateCounter(fieldRes);
       // only update status for playing users
@@ -226,25 +227,25 @@ export default {
       }
     },
 
-    gameOver: function () {
+    gameOver: function() {
       //const content = $("#game-over-content");
-      //if (counter1 > counter2)
+      //if (this.counter1 > this.counter2)
       //  content.text("Player 1 🔷 wins!");
-      //else if (counter2 > counter1)
+      //else if (this.counter2 > this.counter1)
       //  content.text("Player 2 🔴 wins!");
       //else
       //  content.text("It's a draw! ⚪");
       //$("#gameOverModal").modal("show");
     },
 
-    getCell: function (row, col) {
+    getCell: function(row, col) {
       const cell = this.game.field.cells.find(
         (cell) => cell.row === row && cell.col === col
       );
       return cell?.cell ? cell.cell : " ";
     },
 
-    initStatus: function () {
+    initStatus: function() {
       switch (this.playerNumber) {
         case "1": // player 1 always starts <- bad
           this.gameStatus = statusText[1];
@@ -258,7 +259,7 @@ export default {
       }
     },
 
-    updateStatus: function (turn) {
+    updateStatus: function(turn) {
       switch (turn.toString()) {
         case "0": // game over
           this.gameStatus = statusText[0];
@@ -272,22 +273,22 @@ export default {
       }
     },
 
-    updateCounter: function (json) {
+    updateCounter: function(json) {
       // update the page elements
       this.counter1 = json.xcount;
       this.counter2 = json.ocount;
     },
 
-    updateField: function (json) {
+    updateField: function(json) {
       this.game = Field.from(json);
     },
 
-    triggerToast: function (/*msg*/) {
+    triggerToast: function(msg) {
       //$("#toast-msg").text(msg);
       //const toast = new bootstrap.Toast($("#liveToast"));
       //toast.show();
-    },
-  },
+    }
+  }
 };
 </script>
 
