@@ -23,7 +23,6 @@
 <script>
 export default {
   name: "ResetModal"
-  // make doAction get injected here
 };
 </script>
 

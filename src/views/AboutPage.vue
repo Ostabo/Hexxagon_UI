@@ -61,9 +61,11 @@
                                 <figure>
                                   <blockquote class="blockquote mb-4">
                                     <p>
-                                      <i
-                                        class="bi bi-quote text-warning me-2"
-                                      ></i>
+                                      <font-awesome-icon
+                                        class="mt-1 text-warning me-2"
+                                        icon="quote-left"
+                                        size="1x">
+                                      </font-awesome-icon>
                                       <span class="font-italic text-dark">
                                         Hexagons are the Bestagons.
                                       </span>
@@ -105,9 +107,11 @@
                                 <figure>
                                   <blockquote class="blockquote mb-4">
                                     <p>
-                                      <i
-                                        class="bi bi-quote text-warning me-2"
-                                      ></i>
+                                      <font-awesome-icon
+                                        class="mt-1 text-warning me-2"
+                                        icon="quote-left"
+                                        size="1x">
+                                      </font-awesome-icon>
                                       <span class="font-italic text-dark">
                                         <i>Bzzz</i>
                                       </span>
@@ -214,7 +218,7 @@ import WebFrame from "@/views/WebFrame.vue";
 
 export default {
   name: "AboutPage",
-  components: { WebFrame },
+  components: { WebFrame }
 };
 </script>
 

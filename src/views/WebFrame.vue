@@ -1,272 +1,307 @@
 <template>
   <html class="dark-theme" lang="en">
-    <head>
-      <meta charset="utf-8" />
-      <meta content="width=device-width, initial-scale=1" name="viewport" />
-      <meta content="" name="description" />
-      <link
-        as="image"
-        href="@/assets/images/background-universe.jpg"
-        rel="prefetch"
-      />
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <link
+      as="image"
+      href="@/assets/images/background-universe.jpg"
+      rel="prefetch"
+    />
 
-      <title></title>
-    </head>
-    <body class="main-body h-100" onload="themeInit()">
-      <nav class="navbar navbar-expand-sm navbar-dark border-bottom pb-2 fs-4">
-        <div class="container">
-          <a class="navbar-brand" href="/">
-            <img
-              alt="logo"
-              class="logo"
-              height="40"
-              loading="lazy"
-              src="src/assets/images/favicon.ico"
-              width="40"
-            />
-          </a>
-          <button
-            aria-controls="navbarNavAltMarkup"
-            aria-label="Toggle navigation"
-            class="navbar-toggler ms-auto"
-            data-bs-target="#n_bar"
-            data-bs-toggle="collapse"
-            type="button"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div id="n_bar" class="collapse navbar-collapse">
-            <ul class="navbar-nav nav-fill">
-              <li class="nav-item active">
-                <a class="nav-link" href="/">
-                  <i class="bi bi-controller m-1"></i>Home
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/about">
-                  <i class="bi bi-chat-left-quote m-1"></i>About
-                </a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  id="navbarDarkDropdownMenuLink"
-                  aria-expanded="false"
-                  class="nav-link dropdown-toggle"
-                  data-bs-toggle="dropdown"
-                  role="button"
+    <title></title>
+  </head>
+  <body class="main-body h-100" onload="themeInit()">
+  <nav class="navbar navbar-expand-sm navbar-dark border-bottom pb-2 fs-4">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img
+          alt="logo"
+          class="logo"
+          height="40"
+          loading="lazy"
+          src="src/assets/images/favicon.ico"
+          width="40"
+        />
+      </a>
+      <button
+        aria-controls="navbarNavAltMarkup"
+        aria-label="Toggle navigation"
+        class="navbar-toggler ms-auto"
+        data-bs-target="#n_bar"
+        data-bs-toggle="collapse"
+        type="button"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="n_bar" class="collapse navbar-collapse">
+        <ul class="navbar-nav nav-fill">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">
+              <font-awesome-icon
+                class="mt-1"
+                icon="gamepad"
+                size="1x">
+              </font-awesome-icon>
+              Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">
+              <font-awesome-icon
+                class="mt-1"
+                icon="info-circle"
+                size="1x">
+              </font-awesome-icon>
+              About
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              id="navbarDarkDropdownMenuLink"
+              aria-expanded="false"
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+              role="button"
+            >
+              <font-awesome-icon
+                class="mt-1"
+                icon="bars"
+                size="1x">
+              </font-awesome-icon>
+              More
+            </a>
+            <ul
+              aria-labelledby="navbarDarkDropdownMenuLink"
+              class="dropdown-menu dropdown-menu-dark"
+            >
+              <li>
+                <a class="dropdown-item" href="/overview-plain"
+                >Game Plain</a
                 >
-                  <i class="bi bi-list m-1"></i>More
-                </a>
-                <ul
-                  aria-labelledby="navbarDarkDropdownMenuLink"
-                  class="dropdown-menu dropdown-menu-dark"
-                >
-                  <li>
-                    <a class="dropdown-item" href="/overview-plain"
-                      >Game Plain</a
-                    >
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="/status">Game Status</a>
-                  </li>
-                </ul>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/status">Game Status</a>
               </li>
             </ul>
-            <button
-              class="btn btn-light ms-auto"
-              data-bs-target="#loginModal"
-              data-bs-toggle="modal"
-            >
-              <i class="bi bi-person"></i>
-              Login
-            </button>
-            <div class="dropdown my-1 mx-3">
-              <button
-                id="dropdownChat"
-                aria-expanded="false"
-                aria-haspopup="true"
-                class="btn btn-transparent dropdown-toggle text-light"
-                data-bs-toggle="dropdown"
-                data-toggle="dropdown"
-                type="button"
-              >
-                <i class="bi bi-chat"></i>
-              </button>
-              <div aria-labelledby="dropdownChat" class="dropdown-menu p-0">
-                <!-- Chat -->
-              </div>
-            </div>
-            <div class="dropdown mr-3 my-1">
-              <button
-                id="dropdownMenuButton"
-                aria-expanded="false"
-                aria-haspopup="true"
-                class="btn btn-outline-light dropdown-toggle"
-                data-bs-toggle="dropdown"
-                data-toggle="dropdown"
-                type="button"
-              >
-                <i class="bi bi-gear"></i>
-              </button>
-              <div
-                aria-labelledby="dropdownMenuButton"
-                class="dropdown-menu text-center settings"
-              >
+          </li>
+        </ul>
+        <button
+          class="btn btn-light ms-auto"
+          data-bs-target="#loginModal"
+          data-bs-toggle="modal"
+        >
+          <font-awesome-icon
+            class="mt-1"
+            icon="user"
+            size="1x">
+          </font-awesome-icon>
+          Login
+        </button>
+        <div class="dropdown my-1 mx-3">
+          <button
+            id="dropdownChat"
+            aria-expanded="false"
+            aria-haspopup="true"
+            class="btn btn-transparent dropdown-toggle text-light"
+            data-bs-toggle="dropdown"
+            data-toggle="dropdown"
+            type="button"
+          >
+            <font-awesome-icon
+              class="mt-1"
+              icon="message"
+              size="1x">
+            </font-awesome-icon>
+          </button>
+          <div aria-labelledby="dropdownChat" class="dropdown-menu p-0">
+            <ChatPopup></ChatPopup>
+          </div>
+        </div>
+        <div class="dropdown mr-3 my-1">
+          <button
+            id="dropdownMenuButton"
+            aria-expanded="false"
+            aria-haspopup="true"
+            class="btn btn-outline-light dropdown-toggle"
+            data-bs-toggle="dropdown"
+            data-toggle="dropdown"
+            type="button"
+          >
+            <font-awesome-icon
+              class="mt-1"
+              icon="gear"
+              size="1x">
+            </font-awesome-icon>
+          </button>
+          <div
+            aria-labelledby="dropdownMenuButton"
+            class="dropdown-menu text-center settings"
+          >
                 <span>
                   <!-- Theme -->
                 </span>
-                <button
-                  class="dropdown-item"
-                  data-bs-target="#help"
-                  data-bs-toggle="modal"
-                >
-                  <i class="bi bi-question-circle-fill"></i>
-                  Help
-                </button>
-              </div>
-            </div>
+            <button
+              class="dropdown-item"
+              data-bs-target="#help"
+              data-bs-toggle="modal"
+            >
+              <font-awesome-icon
+                class="mt-1"
+                icon="question-circle"
+                size="1x">
+              </font-awesome-icon>
+              Help
+            </button>
           </div>
         </div>
-      </nav>
+      </div>
+    </div>
+  </nav>
 
-      <!-- preload image -->
-      <img
-        alt=""
-        class="img-responsive"
-        src="@/assets/images/background-universe.jpg"
-      />
+  <!-- preload image -->
+  <img
+    alt=""
+    class="img-responsive"
+    src="@/assets/images/background-universe.jpg"
+  />
 
-      <!-- content -->
-      <slot></slot>
+  <!-- content -->
+  <slot></slot>
 
-      <footer class="footer border-top">
-        <div class="container">
-          <div
-            class="d-flex flex-wrap justify-content-lg-center align-items-center"
+  <footer class="footer border-top">
+    <div class="container">
+      <div
+        class="d-flex flex-wrap justify-content-lg-center align-items-center"
+      >
+        <div
+          class="col-md-5 d-flex align-items-center justify-content-lg-between"
+        >
+          <a
+            class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"
+            href="https://github.com/Ostabo/Hexxagon-WA"
           >
-            <div
-              class="col-md-5 d-flex align-items-center justify-content-lg-between"
-            >
-              <a
-                class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"
-                href="https://github.com/Ostabo/Hexxagon-WA"
-              >
-                <img alt="" height="30" src="@/assets/images/github.png" />
-              </a>
-              <span class="m-3">2022 Hexxagon - AIN</span>
-              <a
-                class="text-muted small text-decoration-none"
-                href="https://github.com/naedmi"
-              >
-                Nadine Görzen
-              </a>
-              <a
-                class="text-muted small text-decoration-none"
-                href="https://github.com/Ostabo"
-              >
-                Oskar Borkenhagen
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      <!-- Modal Login -->
-      <div id="loginModal" aria-hidden="true" class="modal fade" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <form action="">
-              <div class="modal-header">
-                <h5 class="modal-title">Login</h5>
-                <button
-                  aria-label="Close"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  type="button"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <div class="mb-3">
-                  <input
-                    id="email"
-                    class="form-control"
-                    name="username"
-                    placeholder="E-Mail"
-                    type="text"
-                  />
-                </div>
-                <div class="mb-3">
-                  <input
-                    id="password"
-                    class="form-control"
-                    name="username"
-                    placeholder="Password"
-                    type="text"
-                  />
-                </div>
-                <div class="mb-3">
-                  <a href="#">Forgot Password?</a>
-                </div>
-              </div>
-              <div class="modal-footer pt-4">
-                <button class="btn btn-primary mx-auto w-100" type="button">
-                  Login
-                </button>
-              </div>
-              <p class="text-center">
-                Don't have an account yet? <a href="#">Sign up</a>
-              </p>
-            </form>
-          </div>
+            <img alt="" height="30" src="@/assets/images/github.png" />
+          </a>
+          <span class="m-3">2022 Hexxagon - AIN</span>
+          <a
+            class="text-muted small text-decoration-none"
+            href="https://github.com/naedmi"
+          >
+            Nadine Görzen
+          </a>
+          <a
+            class="text-muted small text-decoration-none"
+            href="https://github.com/Ostabo"
+          >
+            Oskar Borkenhagen
+          </a>
         </div>
       </div>
+    </div>
+  </footer>
 
-      <!-- Modal Help-->
-      <div id="help" aria-hidden="true" class="modal fade" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Help</h5>
-              <button
-                aria-label="Close"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                type="button"
-              ></button>
+  <!-- Modal Login -->
+  <div id="loginModal" aria-hidden="true" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form action="">
+          <div class="modal-header">
+            <h5 class="modal-title">Login</h5>
+            <button
+              aria-label="Close"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              type="button"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <input
+                id="email"
+                class="form-control"
+                name="username"
+                placeholder="E-Mail"
+                type="text"
+              />
             </div>
-            <div class="modal-body">
-              <p class="p-4">
-                Issues fix themselves if you refresh the page.<br />
-                <strong>F5</strong> is your friend.
-              </p>
+            <div class="mb-3">
+              <input
+                id="password"
+                class="form-control"
+                name="username"
+                placeholder="Password"
+                type="text"
+              />
             </div>
-            <div
-              class="modal-footer pt-4 justify-content-center align-content-center"
-            >
-              If you have any questions, please contact us @@
-              <a href="https://github.com/Ostabo/Hexxagon-WA">
-                <img
-                  alt="Github"
-                  class="w-100"
-                  src="src/assets/images/GitHub_Logo_White.png"
-                />
-              </a>
+            <div class="mb-3">
+              <a href="#">Forgot Password?</a>
             </div>
           </div>
+          <div class="modal-footer pt-4">
+            <button class="btn btn-primary mx-auto w-100" type="button">
+              Login
+            </button>
+          </div>
+          <p class="text-center">
+            Don't have an account yet? <a href="#">Sign up</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Help-->
+  <div id="help" aria-hidden="true" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Help</h5>
+          <button
+            aria-label="Close"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            type="button"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p class="p-4">
+            Issues fix themselves if you refresh the page.<br />
+            <strong>F5</strong> is your friend.
+          </p>
+        </div>
+        <div
+          class="modal-footer pt-4 justify-content-center align-content-center"
+        >
+          If you have any questions, please contact us @@
+          <a href="https://github.com/Ostabo/Hexxagon-WA">
+            <img
+              alt="Github"
+              class="w-100"
+              src="src/assets/images/GitHub_Logo_White.png"
+            />
+          </a>
         </div>
       </div>
-    </body>
+    </div>
+  </div>
+  </body>
   </html>
 </template>
 
 <script>
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import ChatPopup from "@/components/ChatPopup.vue";
+
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
 export default {
   name: "WebFrame",
+  components: { ChatPopup, FontAwesomeIcon },
   data() {
     return {
-      isCollapsed: true,
+      isCollapsed: true
     };
   },
   mounted() {
@@ -284,7 +319,8 @@ export default {
     }
   },
   methods: {
-    themeInit() {},
+    themeInit() {
+    },
     toggleTheme() {
       document.documentElement.classList.toggle("dark-theme");
       document.documentElement.classList.toggle("light-theme");
@@ -295,8 +331,8 @@ export default {
         document.getElementById("toggle-container").title = "Light";
         localStorage.setItem("theme", "light");
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -41,7 +41,11 @@
           data-bs-toggle="dropdown"
           type="button"
         >
-          <i class="bi bi-dpad-fill p-1"></i>
+          <font-awesome-icon
+            class="mt-1"
+            icon="keyboard"
+            size="1x">
+          </font-awesome-icon>
           actions
         </button>
         <div
@@ -76,6 +80,26 @@
     </div>
   </WebFrame>
   <ResetModal></ResetModal>
+  <SaveModal></SaveModal>
+  <LoadModal></LoadModal>
+  <GameOverModal></GameOverModal>
+  <!-- Toast -->
+  <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+    <div id="liveToast" aria-atomic="true" aria-live="assertive" class="toast" role="alert">
+      <div class="toast-header">
+        <font-awesome-icon
+          class="mt-1 mx-lg-2 fs-2"
+          icon="triangle-exclamation"
+          size="1x">
+        </font-awesome-icon>
+        <strong class="mx-auto fs-5">Watch out!</strong>
+        <button id="toast-button" aria-label="Close" class="bi bi-x mx-lg-2 fs-2" data-bs-dismiss="toast"
+                type="button"></button>
+      </div>
+      <div id="toast-msg" class="toast-body">
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -85,6 +109,10 @@ import { Field } from "@/assets/classes";
 import LoadingIcon from "@/components/LoadingIcon.vue";
 import WebFrame from "@/views/WebFrame.vue";
 import ResetModal from "@/components/ResetModal.vue";
+import { SERVER_URL } from "@/main";
+import SaveModal from "@/components/SaveModal.vue";
+import LoadModal from "@/components/LoadModal.vue";
+import GameOverModal from "@/components/GameOverModal.vue";
 
 export const availableTurns = ["X", "O"];
 export const statusText = [
@@ -97,11 +125,10 @@ export const WS_PLAYER_REQUEST = "Requesting player number";
 export const WS_PLAYER_RESPONSE = "Player number: ";
 export const WS_KEEP_ALIVE_RESPONSE = "Keep alive";
 export const WS_KEEP_ALIVE_REQUEST = "ping";
-export const SERVER_URL = "localhost:9000";
 
 export default {
   name: "GameView",
-  components: { ResetModal, WebFrame, LoadingIcon, PlayerStone, HexTile },
+  components: { GameOverModal, LoadModal, SaveModal, ResetModal, WebFrame, LoadingIcon, PlayerStone, HexTile },
   data() {
     return {
       socket: undefined,
@@ -177,29 +204,12 @@ export default {
     if (this.socket) this.socket.close();
   },
   methods: {
-    doAction: async function(action) {
-      const res = await fetch(action, {
-        method: "POST",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json"
-        },
-        body: ""
-      });
-
-      if (res.ok)
-        this.socket.send(
-          `Action done: ${action} -> Response: ${await res.text()}`
-        );
-      else this.triggerToast(await res.text());
-    },
     clickTile: async function(row, col) {
       switch (this.playerNumber) {
         case "1":
         case "2":
           await this.doAction(
-            `http://${SERVER_URL}/place/${col}/${row}/${
-              availableTurns[this.playerNumber - 1]
+            `place/${col}/${row}/${availableTurns[this.playerNumber - 1]
             }`
           );
           break;
