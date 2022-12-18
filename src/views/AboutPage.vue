@@ -222,4 +222,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.about-heading {
+  color: white;
+  text-align: center;
+  font-size: 1.45vw;
+}
+</style>
