@@ -5,6 +5,17 @@ import router from "./router";
 // Import all of Bootstrap's JS
 import * as bootstrap from "bootstrap"; // eslint-disable-line no-unused-vars
 
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+  components,
+  directives,
+})
+
 import "./assets/main.scss";
 
 /* import the fontawesome core */
@@ -83,6 +94,6 @@ app.mixin({
   },
 });
 
-app.use(router);
-
+app.use(router)
+app.use(vuetify);
 app.mount("#app");

@@ -218,31 +218,27 @@
           </div>
           <div class="modal-body">
             <div class="mb-3">
-              <input
-                id="email"
-                class="form-control"
-                name="username"
-                placeholder="E-Mail"
-                type="text"
-              />
+              <v-text-field
+                  label="E-Mail"
+                  class="mb-2"
+              ></v-text-field>
             </div>
             <div class="mb-3">
-              <input
-                id="password"
-                class="form-control"
-                name="username"
-                placeholder="Password"
-                type="text"
-              />
+              <v-text-field
+                  label="Password"
+                  placeholder="Enter your password"
+              ></v-text-field>
             </div>
             <div class="mb-3">
               <a href="#">Forgot Password?</a>
             </div>
           </div>
-          <div class="modal-footer pt-4">
-            <button class="btn btn-primary mx-auto w-100" type="button">
+          <div class="modal-footer pt-4 justify-center">
+            <v-btn
+                variant="outlined"
+                color="deep-purple darken-4">
               Login
-            </button>
+            </v-btn>
           </div>
           <p class="text-center">
             Don't have an account yet? <a href="#">Sign up</a>
