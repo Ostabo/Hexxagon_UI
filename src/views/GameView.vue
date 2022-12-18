@@ -133,10 +133,10 @@ export default {
     return {
       socket: undefined,
       loading: Boolean,
-      counter1: String,
-      counter2: String,
-      gameStatus: String,
-      playerNumber: String,
+      counter1: '',
+      counter2: '',
+      gameStatus: '',
+      playerNumber: '',
       game: undefined
     };
   },
