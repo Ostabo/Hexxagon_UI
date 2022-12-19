@@ -62,7 +62,7 @@
                                   <blockquote class="blockquote mb-4">
                                     <p>
                                       <font-awesome-icon
-                                        class="mt-1 text-warning me-2"
+                                        class="mt-1 yellow me-2"
                                         icon="quote-left"
                                         size="1x">
                                       </font-awesome-icon>
@@ -108,7 +108,7 @@
                                   <blockquote class="blockquote mb-4">
                                     <p>
                                       <font-awesome-icon
-                                        class="mt-1 text-warning me-2"
+                                        class="mt-1 yellow me-2"
                                         icon="quote-left"
                                         size="1x">
                                       </font-awesome-icon>
@@ -227,5 +227,13 @@ export default {
   color: white;
   text-align: center;
   font-size: 1.45vw;
+}
+
+.img-card {
+  width: 35%;
+}
+
+.yellow {
+  color: #ffd300;
 }
 </style>

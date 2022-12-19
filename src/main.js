@@ -6,15 +6,15 @@ import router from "./router";
 import * as bootstrap from "bootstrap"; // eslint-disable-line no-unused-vars
 
 // Vuetify
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
+import "vuetify/styles";
+import { createVuetify } from "vuetify";
+import * as components from "vuetify/components";
+import * as directives from "vuetify/directives";
 
 const vuetify = createVuetify({
   components,
   directives,
-})
+});
 
 import "./assets/main.scss";
 
@@ -94,6 +94,6 @@ app.mixin({
   },
 });
 
-app.use(router)
+app.use(router);
 app.use(vuetify);
 app.mount("#app");

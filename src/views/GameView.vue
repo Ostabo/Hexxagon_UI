@@ -83,23 +83,28 @@
   <SaveModal></SaveModal>
   <LoadModal></LoadModal>
   <GameOverModal></GameOverModal>
-  <!-- Toast -->
-  <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
-    <div id="liveToast" aria-atomic="true" aria-live="assertive" class="toast" role="alert">
-      <div class="toast-header">
-        <font-awesome-icon
-          class="mt-1 mx-lg-2 fs-2"
-          icon="triangle-exclamation"
-          size="1x">
-        </font-awesome-icon>
-        <strong class="mx-auto fs-5">Watch out!</strong>
-        <button id="toast-button" aria-label="Close" class="bi bi-x mx-lg-2 fs-2" data-bs-dismiss="toast"
-                type="button"></button>
-      </div>
-      <div id="toast-msg" class="toast-body">
-      </div>
-    </div>
-  </div>
+
+  <v-snackbar
+    v-model="snackbar"
+  >
+    <font-awesome-icon
+      class="mt-1 mx-lg-2 fs-2"
+      icon="triangle-exclamation"
+      size="1x">
+    </font-awesome-icon>
+    <span class="toast-holder">
+    {{ msg }}
+    </span>
+    <template v-slot:actions>
+      <v-btn
+        color="red"
+        variant="text"
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </template>
+  </v-snackbar>
 </template>
 
 <script>
@@ -133,11 +138,13 @@ export default {
     return {
       socket: undefined,
       loading: Boolean,
-      counter1: '',
-      counter2: '',
-      gameStatus: '',
-      playerNumber: '',
-      game: undefined
+      counter1: "",
+      counter2: "",
+      gameStatus: "",
+      playerNumber: "",
+      game: undefined,
+      snackbar: false,
+      msg: String
     };
   },
   mounted() {
@@ -294,9 +301,8 @@ export default {
     },
 
     triggerToast: function(msg) {
-      //$("#toast-msg").text(msg);
-      //const toast = new bootstrap.Toast($("#liveToast"));
-      //toast.show();
+      this.msg = msg;
+      this.snackbar = true;
     }
   }
 };
@@ -331,5 +337,9 @@ export default {
   justify-content: center;
   align-items: center;
   margin-top: math.div(8vmin, 8);
+}
+
+.toast-holder {
+  font-size: 1.75rem;
 }
 </style>
