@@ -17,6 +17,16 @@ const router = createRouter({
       component: () => import("../views/AboutPage.vue"),
     },
     {
+      path: "/game-plain",
+      name: "game-plain",
+      component: () => import("../views/GamePlain.vue"),
+    },
+    {
+      path: "/status-plain",
+      name: "status-plain",
+      component: () => import("../views/StatusPlain.vue"),
+    },
+    {
       path: "/:pathMatch(.*)*",
       redirect: "/",
     },

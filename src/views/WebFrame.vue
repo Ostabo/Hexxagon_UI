@@ -71,12 +71,12 @@
                 class="dropdown-menu dropdown-menu-dark"
               >
                 <li>
-                  <a class="dropdown-item" href="/overview-plain"
+                  <a class="dropdown-item" href="/game-plain"
                   >Game Plain</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/status">Game Status</a>
+                  <a class="dropdown-item" href="/status-plain">Game Status</a>
                 </li>
               </ul>
             </li>
@@ -133,9 +133,6 @@
               aria-labelledby="dropdownMenuButton"
               class="dropdown-menu text-center settings"
             >
-                <span>
-                  <!-- Theme -->
-                </span>
               <button
                 class="dropdown-item"
                 data-bs-target="#help"
