@@ -41,10 +41,7 @@
           data-bs-toggle="dropdown"
           type="button"
         >
-          <font-awesome-icon
-            class="mt-1"
-            icon="keyboard"
-            size="1x">
+          <font-awesome-icon class="mt-1" icon="keyboard" size="1x">
           </font-awesome-icon>
           actions
         </button>
@@ -52,28 +49,28 @@
           aria-labelledby="dropdownMenuButton"
           class="dropdown-menu dropdown-menu-dark"
         >
-          <a id="undo" class="dropdown-item" onclick="doAction('undo')">undo</a>
-          <a id="redo" class="dropdown-item" onclick="doAction('redo')">redo</a>
+          <a id="undo" class="dropdown-item" @click="doAction('undo')">undo</a>
+          <a id="redo" class="dropdown-item" @click="doAction('redo')">redo</a>
           <a
             id="save"
             class="dropdown-item"
             data-bs-target="#saveModal"
             data-bs-toggle="modal"
-          >save</a
+            >save</a
           >
           <a
             id="load"
             class="dropdown-item"
             data-bs-target="#loadModal"
             data-bs-toggle="modal"
-          >load</a
+            >load</a
           >
           <a
             id="reset"
             class="dropdown-item"
             data-bs-target="#resetModal"
             data-bs-toggle="modal"
-          >reset</a
+            >reset</a
           >
         </div>
       </div>
@@ -82,25 +79,20 @@
   <ResetModal></ResetModal>
   <SaveModal></SaveModal>
   <LoadModal></LoadModal>
-  <GameOverModal></GameOverModal>
+  <GameOverModal :msg="gameOverMessage" :shown="showModal"></GameOverModal>
 
-  <v-snackbar
-    v-model="snackbar"
-  >
+  <v-snackbar v-model="snackbar">
     <font-awesome-icon
       class="mt-1 mx-lg-2 fs-2"
       icon="triangle-exclamation"
-      size="1x">
+      size="1x"
+    >
     </font-awesome-icon>
     <span class="toast-holder">
-    {{ msg }}
+      {{ msg }}
     </span>
     <template v-slot:actions>
-      <v-btn
-        color="red"
-        variant="text"
-        @click="snackbar = false"
-      >
+      <v-btn color="red" variant="text" @click="snackbar = false">
         Close
       </v-btn>
     </template>
@@ -124,7 +116,7 @@ export const statusText = [
   "GAME OVER",
   "Your turn",
   "Waiting for other player...",
-  "You are spectator"
+  "You are spectator",
 ];
 export const WS_PLAYER_REQUEST = "Requesting player number";
 export const WS_PLAYER_RESPONSE = "Player number: ";
@@ -133,7 +125,16 @@ export const WS_KEEP_ALIVE_REQUEST = "ping";
 
 export default {
   name: "GameView",
-  components: { GameOverModal, LoadModal, SaveModal, ResetModal, WebFrame, LoadingIcon, PlayerStone, HexTile },
+  components: {
+    GameOverModal,
+    LoadModal,
+    SaveModal,
+    ResetModal,
+    WebFrame,
+    LoadingIcon,
+    PlayerStone,
+    HexTile,
+  },
   data() {
     return {
       socket: undefined,
@@ -144,15 +145,17 @@ export default {
       playerNumber: "",
       game: undefined,
       snackbar: false,
-      msg: String
+      msg: String,
+      gameOverMessage: String,
+      showModal: false,
     };
   },
   mounted() {
     fetch("http://" + SERVER_URL + "/game", {
       method: "GET",
       headers: {
-        Accept: "application/json"
-      }
+        Accept: "application/json",
+      },
     })
       .then((res) => {
         if (res.ok) {
@@ -211,13 +214,28 @@ export default {
     if (this.socket) this.socket.close();
   },
   methods: {
-    clickTile: async function(row, col) {
+    doAction: async function (action) {
+      const res = await fetch(`http://${SERVER_URL}/` + action, {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: "",
+      });
+
+      if (res.ok)
+        this.socket.send(
+          `Action done: ${action} -> Response: ${await res.text()}`
+        );
+      else this.triggerToast(await res.text());
+    },
+    clickTile: async function (row, col) {
       switch (this.playerNumber) {
         case "1":
         case "2":
           await this.doAction(
-            `place/${col}/${row}/${availableTurns[this.playerNumber - 1]
-            }`
+            `place/${col}/${row}/${availableTurns[this.playerNumber - 1]}`
           );
           break;
         default:
@@ -225,7 +243,7 @@ export default {
       }
     },
 
-    updateGame: function(fieldRes) {
+    updateGame: function (fieldRes) {
       // update the page
       this.updateCounter(fieldRes);
       // only update status for playing users
@@ -244,25 +262,25 @@ export default {
       }
     },
 
-    gameOver: function() {
-      //const content = $("#game-over-content");
-      //if (this.counter1 > this.counter2)
-      //  content.text("Player 1 🔷 wins!");
-      //else if (this.counter2 > this.counter1)
-      //  content.text("Player 2 🔴 wins!");
-      //else
-      //  content.text("It's a draw! ⚪");
-      //$("#gameOverModal").modal("show");
+    gameOver: function () {
+      this.gameOverMessage =
+        this.counter1 > this.counter2
+          ? "Player 1 🔷 wins!"
+          : this.counter1 < this.counter2
+          ? "Player 2 🔴 wins!"
+          : "It's a draw! ⚪";
+
+      this.showModal = true;
     },
 
-    getCell: function(row, col) {
+    getCell: function (row, col) {
       const cell = this.game.field.cells.find(
         (cell) => cell.row === row && cell.col === col
       );
       return cell?.cell ? cell.cell : " ";
     },
 
-    initStatus: function() {
+    initStatus: function () {
       switch (this.playerNumber) {
         case "1": // player 1 always starts <- bad
           this.gameStatus = statusText[1];
@@ -276,7 +294,7 @@ export default {
       }
     },
 
-    updateStatus: function(turn) {
+    updateStatus: function (turn) {
       switch (turn.toString()) {
         case "0": // game over
           this.gameStatus = statusText[0];
@@ -290,21 +308,21 @@ export default {
       }
     },
 
-    updateCounter: function(json) {
+    updateCounter: function (json) {
       // update the page elements
       this.counter1 = json.xcount;
       this.counter2 = json.ocount;
     },
 
-    updateField: function(json) {
+    updateField: function (json) {
       this.game = Field.from(json);
     },
 
-    triggerToast: function(msg) {
+    triggerToast: function (msg) {
       this.msg = msg;
       this.snackbar = true;
-    }
-  }
+    },
+  },
 };
 </script>
 

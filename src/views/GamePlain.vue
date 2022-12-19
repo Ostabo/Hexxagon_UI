@@ -1,42 +1,37 @@
 <template>
   <WebFrame>
     <main>
-    <textarea class="textfield" disabled>
-      {{ game }}
-    </textarea>
+      <textarea class="textfield" v-model="game" disabled> </textarea>
     </main>
   </WebFrame>
 </template>
 
 <script>
-import { SERVER_URL } from "@/main";
 import WebFrame from "@/views/WebFrame.vue";
+import { apiGet } from "@/assets/api";
 
 export default {
   name: "GamePlain",
   components: { WebFrame },
   data() {
     return {
-      game: ""
+      game: "",
     };
   },
   mounted() {
-    fetch(`http://${SERVER_URL}/game-plain`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json"
-      }
-    }).then(res => {
-      if (res.ok) {
-        return res.text();
-      }
-    }).then(res => {
-      this.game = res;
-    }).catch(err => {
-      this.game = err;
-    });
-  }
+    apiGet("game-plain")
+      .then((res) => {
+        if (res.ok) {
+          return res.text();
+        }
+      })
+      .then((res) => {
+        this.game = res;
+      })
+      .catch((err) => {
+        this.game = err;
+      });
+  },
 };
 </script>
 

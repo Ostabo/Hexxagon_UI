@@ -1,42 +1,37 @@
 <template>
   <WebFrame>
     <main>
-      <textarea class="textfield" disabled>
-        {{ status }}
-      </textarea>
+      <textarea v-model="status" class="textfield" disabled> </textarea>
     </main>
   </WebFrame>
 </template>
 
 <script>
 import WebFrame from "@/views/WebFrame.vue";
-import { SERVER_URL } from "@/main";
+import { apiGet } from "@/assets/api";
 
 export default {
   name: "StatusPlain",
   components: { WebFrame },
   data() {
     return {
-      status: ""
+      status: "",
     };
   },
   mounted() {
-    fetch(`http://${SERVER_URL}/status-plain`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json"
-      }
-    }).then(res => {
-      if (res.ok) {
-        return res.text();
-      }
-    }).then(res => {
-      this.status = res;
-    }).catch(err => {
-      this.status = err;
-    });
-  }
+    apiGet("status-plain")
+      .then((res) => {
+        if (res.ok) {
+          return res.text();
+        }
+      })
+      .then((res) => {
+        this.status = res;
+      })
+      .catch((err) => {
+        this.status = err;
+      });
+  },
 };
 </script>
 

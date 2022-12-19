@@ -73,27 +73,6 @@ const app = createApp(App);
 
 app.component("font-awesome-icon", FontAwesomeIcon);
 
-app.mixin({
-  methods: {
-    doAction: async function (action) {
-      const res = await fetch(`http://${SERVER_URL}/` + action, {
-        method: "POST",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-        body: "",
-      });
-
-      if (res.ok)
-        this.socket.send(
-          `Action done: ${action} -> Response: ${await res.text()}`
-        );
-      else this.triggerToast(await res.text());
-    },
-  },
-});
-
 app.use(router);
 app.use(vuetify);
 app.mount("#app");

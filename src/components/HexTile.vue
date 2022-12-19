@@ -13,14 +13,14 @@ export default {
   props: {
     stone: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     hasStone() {
       return this.stone === "X" || this.stone === "O";
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -44,7 +44,6 @@ export default {
   &:nth-child(odd) {
     margin-top: math.div((8vmin * -1 - 8vmin), 1.75) !important;
   }
-
 }
 
 .hex:not(.hoverable) {
@@ -55,5 +54,4 @@ export default {
   cursor: pointer;
   scale: 1.1;
 }
-
 </style>

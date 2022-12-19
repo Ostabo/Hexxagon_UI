@@ -33,20 +33,14 @@
           <ul class="navbar-nav nav-fill">
             <li class="nav-item active">
               <a class="nav-link" href="/">
-                <font-awesome-icon
-                  class="mt-1"
-                  icon="gamepad"
-                  size="1x">
+                <font-awesome-icon class="mt-1" icon="gamepad" size="1x">
                 </font-awesome-icon>
                 Home
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/about">
-                <font-awesome-icon
-                  class="mt-1"
-                  icon="info-circle"
-                  size="1x">
+                <font-awesome-icon class="mt-1" icon="info-circle" size="1x">
                 </font-awesome-icon>
                 About
               </a>
@@ -59,10 +53,7 @@
                 data-bs-toggle="dropdown"
                 role="button"
               >
-                <font-awesome-icon
-                  class="mt-1"
-                  icon="bars"
-                  size="1x">
+                <font-awesome-icon class="mt-1" icon="bars" size="1x">
                 </font-awesome-icon>
                 More
               </a>
@@ -71,9 +62,7 @@
                 class="dropdown-menu dropdown-menu-dark"
               >
                 <li>
-                  <a class="dropdown-item" href="/game-plain"
-                  >Game Plain</a
-                  >
+                  <a class="dropdown-item" href="/game-plain">Game Plain</a>
                 </li>
                 <li>
                   <a class="dropdown-item" href="/status-plain">Game Status</a>
@@ -86,10 +75,7 @@
             data-bs-target="#loginModal"
             data-bs-toggle="modal"
           >
-            <font-awesome-icon
-              class="mt-1"
-              icon="user"
-              size="1x">
+            <font-awesome-icon class="mt-1" icon="user" size="1x">
             </font-awesome-icon>
             Login
           </button>
@@ -103,10 +89,7 @@
               data-toggle="dropdown"
               type="button"
             >
-              <font-awesome-icon
-                class="mt-1"
-                icon="message"
-                size="1x">
+              <font-awesome-icon class="mt-1" icon="message" size="1x">
               </font-awesome-icon>
             </button>
             <div aria-labelledby="dropdownChat" class="dropdown-menu p-0">
@@ -123,10 +106,7 @@
               data-toggle="dropdown"
               type="button"
             >
-              <font-awesome-icon
-                class="mt-1"
-                icon="gear"
-                size="1x">
+              <font-awesome-icon class="mt-1" icon="gear" size="1x">
               </font-awesome-icon>
             </button>
             <div
@@ -141,7 +121,8 @@
                 <font-awesome-icon
                   class="mt-1"
                   icon="question-circle"
-                  size="1x">
+                  size="1x"
+                >
                 </font-awesome-icon>
                 Help
               </button>
@@ -209,10 +190,7 @@
             </div>
             <div class="modal-body">
               <div class="mb-3">
-                <v-text-field
-                  class="mb-2"
-                  label="E-Mail"
-                ></v-text-field>
+                <v-text-field class="mb-2" label="E-Mail"></v-text-field>
               </div>
               <div class="mb-3">
                 <v-text-field
@@ -225,9 +203,7 @@
               </div>
             </div>
             <div class="modal-footer pt-4 justify-center">
-              <v-btn
-                color="deep-purple darken-4"
-                variant="outlined">
+              <v-btn color="deep-purple darken-4" variant="outlined">
                 Login
               </v-btn>
             </div>
@@ -287,7 +263,7 @@ export default {
   components: { ChatPopup, FontAwesomeIcon },
   data() {
     return {
-      isCollapsed: true
+      isCollapsed: true,
     };
   },
   mounted() {
@@ -305,8 +281,7 @@ export default {
     }
   },
   methods: {
-    themeInit() {
-    },
+    themeInit() {},
     toggleTheme() {
       document.documentElement.classList.toggle("dark-theme");
       document.documentElement.classList.toggle("light-theme");
@@ -317,8 +292,8 @@ export default {
         document.getElementById("toggle-container").title = "Light";
         localStorage.setItem("theme", "light");
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -411,10 +386,6 @@ export default {
     min-width: min-content;
     left: 50%;
     transform: translateX(-50%);
-
-    .dropdown-item {
-      margin-top: 1vmin;
-    }
   }
 
   h1.welcome {

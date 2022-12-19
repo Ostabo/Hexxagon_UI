@@ -64,7 +64,8 @@
                                       <font-awesome-icon
                                         class="mt-1 yellow me-2"
                                         icon="quote-left"
-                                        size="1x">
+                                        size="1x"
+                                      >
                                       </font-awesome-icon>
                                       <span class="font-italic text-dark">
                                         Hexagons are the Bestagons.
@@ -110,7 +111,8 @@
                                       <font-awesome-icon
                                         class="mt-1 yellow me-2"
                                         icon="quote-left"
-                                        size="1x">
+                                        size="1x"
+                                      >
                                       </font-awesome-icon>
                                       <span class="font-italic text-dark">
                                         <i>Bzzz</i>
@@ -218,7 +220,7 @@ import WebFrame from "@/views/WebFrame.vue";
 
 export default {
   name: "AboutPage",
-  components: { WebFrame }
+  components: { WebFrame },
 };
 </script>
 

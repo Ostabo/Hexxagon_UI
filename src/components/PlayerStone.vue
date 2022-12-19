@@ -19,18 +19,18 @@ export default {
   props: {
     player: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     color() {
       return this.player === "X"
         ? "blue"
         : this.player === "O"
-          ? "red"
-          : "white";
-    }
-  }
+        ? "red"
+        : "white";
+    },
+  },
 };
 </script>
 
@@ -39,6 +39,6 @@ export default {
 
 .stone {
   color: v-bind(color);
-  filter: drop-shadow(0 0 0.5em v-bind(color));
+  filter: drop-shadow(0 1px 2px $color-bright);
 }
 </style>

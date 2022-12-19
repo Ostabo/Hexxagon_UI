@@ -1,18 +1,41 @@
 <template>
-  <div class="modal fade" id="loadModal" tabindex="-1" aria-labelledby="loadModalLabel" aria-hidden="true">
+  <div
+    id="loadModal"
+    aria-hidden="true"
+    aria-labelledby="loadModalLabel"
+    class="modal fade"
+    tabindex="-1"
+  >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="loadModalLabel">Are you sure?</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h1 id="loadModalLabel" class="modal-title fs-5">Are you sure?</h1>
+          <button
+            aria-label="Close"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            type="button"
+          ></button>
         </div>
         <div class="modal-body">
           <p>Loading a game will override your current game progress.</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="doAction('load')" data-bs-dismiss="modal">
-            Continue</button>
+          <button
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+            type="button"
+          >
+            Close
+          </button>
+          <button
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            type="button"
+            @click="load()"
+          >
+            Continue
+          </button>
         </div>
       </div>
     </div>
@@ -20,11 +43,18 @@
 </template>
 
 <script>
+import { apiPost } from "@/assets/api";
+
 export default {
-  name: "LoadModal"
+  name: "LoadModal",
+  methods: {
+    load: function () {
+      apiPost("load").then(() => {
+        window.location.reload();
+      });
+    },
+  },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
