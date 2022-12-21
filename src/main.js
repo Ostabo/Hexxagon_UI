@@ -44,6 +44,7 @@ import {
   faTriangleExclamation,
   faQuoteLeft,
   faPaperPlane,
+  faWifi,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGem as fG } from "@fortawesome/free-regular-svg-icons";
 
@@ -67,6 +68,7 @@ library.add(faInfoCircle);
 library.add(faTriangleExclamation);
 library.add(faQuoteLeft);
 library.add(faPaperPlane);
+library.add(faWifi);
 
 export const SERVER_URL = "localhost:9000";
 const app = createApp(App);

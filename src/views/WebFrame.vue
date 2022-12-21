@@ -33,9 +33,16 @@
           <ul class="navbar-nav nav-fill">
             <li class="nav-item active">
               <a class="nav-link" href="/">
+                <font-awesome-icon class="mt-1" icon="wifi" size="1x">
+                </font-awesome-icon>
+                Online
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/local">
                 <font-awesome-icon class="mt-1" icon="gamepad" size="1x">
                 </font-awesome-icon>
-                Home
+                Local
               </a>
             </li>
             <li class="nav-item">
@@ -263,7 +270,7 @@ export default {
   components: { ChatPopup, FontAwesomeIcon },
   data() {
     return {
-      isCollapsed: true,
+      isCollapsed: true
     };
   },
   mounted() {
@@ -281,7 +288,8 @@ export default {
     }
   },
   methods: {
-    themeInit() {},
+    themeInit() {
+    },
     toggleTheme() {
       document.documentElement.classList.toggle("dark-theme");
       document.documentElement.classList.toggle("light-theme");
@@ -292,8 +300,8 @@ export default {
         document.getElementById("toggle-container").title = "Light";
         localStorage.setItem("theme", "light");
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
