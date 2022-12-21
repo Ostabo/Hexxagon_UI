@@ -15,7 +15,7 @@
             class="logo"
             height="40"
             loading="lazy"
-            src="src/assets/images/favicon.ico"
+            src="/favicon.ico"
             width="40"
           />
         </a>
@@ -242,7 +242,7 @@
               <img
                 alt="Github"
                 class="w-100"
-                src="src/assets/images/GitHub_Logo_White.png"
+                src="@/assets/images/GitHub_Logo_White.png"
               />
             </a>
           </div>

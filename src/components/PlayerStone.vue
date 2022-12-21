@@ -1,15 +1,7 @@
 <template>
   <span class="stone">
-    <font-awesome-icon
-      v-if="player === 'X'"
-      :size="'1x'"
-      icon="fa-solid fa-gem"
-    />
-    <font-awesome-icon
-      v-if="player === 'O'"
-      :size="'1x'"
-      icon="fa-regular fa-gem"
-    />
+    <img v-if="player === 'X'" alt="X" src="@/assets/images/gem-blue.png" />
+    <img v-if="player === 'O'" alt="O" src="@/assets/images/gem-red.png" />
   </span>
 </template>
 
@@ -37,8 +29,10 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/main.scss";
 
-.stone {
-  color: v-bind(color);
-  filter: drop-shadow(0 1px 2px $color-bright);
+.stone img {
+  width: 6vmin;
+  margin: 0 0 5px 2px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 1px $color-darker);
 }
 </style>
