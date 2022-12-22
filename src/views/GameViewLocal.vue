@@ -64,6 +64,7 @@ import ResetModal from "@/components/ResetModal.vue";
 import SaveModal from "@/components/SaveModal.vue";
 import LoadModal from "@/components/LoadModal.vue";
 import GameOverModal from "@/components/GameOverModal.vue";
+import { clickSound, errorSound, gameOverSound } from "@/main";
 
 export const availableTurns = ["X", "O"];
 export const EMPTY = "E";
@@ -127,9 +128,19 @@ export default {
     },
     clickTile(i, n) {
       if (this.hexField.get(`${i}:${n}`) !== EMPTY) {
+        if (errorSound.paused)
+          errorSound.play();
+        else
+          errorSound.currentTime = 0;
+
         this.triggerToast("Occupied!");
         return;
       }
+      if (clickSound.paused)
+        clickSound.play();
+      else
+        clickSound.currentTime = 0;
+
       this.hexField.set(`${i}:${n}`, this.turn);
       let addPoints = 1;
       let subPoints = 0;
@@ -159,6 +170,7 @@ export default {
     },
 
     gameOver: function() {
+      gameOverSound.play();
       const gameOverMessage =
         this.counter1 > this.counter2
           ? "Player 1 wins!"

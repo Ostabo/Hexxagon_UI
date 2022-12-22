@@ -70,6 +70,14 @@ library.add(faQuoteLeft);
 library.add(faPaperPlane);
 library.add(faWifi);
 
+const [cS, eS] = ["/click-good.wav", "/click-bad.wav"];
+export const clickSound = new Audio(cS);
+clickSound.volume = 0.4;
+export const errorSound = new Audio(eS);
+errorSound.volume = 0.4;
+export const gameOverSound = new Audio("/game-over.wav");
+gameOverSound.volume = 0.4;
+
 export const SERVER_URL = "localhost:9000";
 const app = createApp(App);
 

@@ -106,7 +106,7 @@ import { Field } from "@/assets/classes";
 import LoadingIcon from "@/components/LoadingIcon.vue";
 import WebFrame from "@/views/WebFrame.vue";
 import ResetModal from "@/components/ResetModal.vue";
-import { SERVER_URL } from "@/main";
+import { clickSound, errorSound, gameOverSound, SERVER_URL } from "@/main";
 import SaveModal from "@/components/SaveModal.vue";
 import LoadModal from "@/components/LoadModal.vue";
 import GameOverModal from "@/components/GameOverModal.vue";
@@ -224,12 +224,17 @@ export default {
         body: ""
       });
 
-      if (res.ok)
+      if (res.ok) {
+        if (clickSound.paused)
+          await clickSound.play();
+        else
+          clickSound.currentTime = 0;
         this.socket.send(
           `Action done: ${action} -> Response: ${await res.text()}`
         );
-      else this.triggerToast(await res.text());
+      } else this.triggerToast(await res.text());
     },
+
     clickTile: async function(row, col) {
       switch (this.playerNumber) {
         case "1":
@@ -263,6 +268,7 @@ export default {
     },
 
     gameOver: function() {
+      gameOverSound.play();
       this.gameOverMessage =
         this.counter1 > this.counter2
           ? "Player 1 wins!"
@@ -319,6 +325,11 @@ export default {
     },
 
     triggerToast: function(msg) {
+      if (errorSound.paused)
+        errorSound.play();
+      else
+        errorSound.currentTime = 0;
+
       this.msg = msg;
       this.snackbar = true;
     }
