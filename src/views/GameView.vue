@@ -1,6 +1,6 @@
 <template>
   <LoadingIcon v-if="loading"></LoadingIcon>
-  <WebFrame v-else>
+  <WebFrame v-else ref="frame">
     <div class="container">
       <h1 class="p-3">Welcome to Hexxagon!</h1>
       <div class="game-container">
@@ -45,10 +45,7 @@
           </font-awesome-icon>
           actions
         </button>
-        <div
-          aria-labelledby="dropdownMenuButton"
-          class="dropdown-menu"
-        >
+        <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
           <a id="undo" class="dropdown-item" @click="doAction('undo')">undo</a>
           <a id="redo" class="dropdown-item" @click="doAction('redo')">redo</a>
           <a
@@ -116,7 +113,7 @@ export const statusText = [
   "GAME OVER",
   "Your turn",
   "Waiting for other player...",
-  "You are spectator"
+  "You are spectator",
 ];
 export const WS_PLAYER_REQUEST = "Requesting player number";
 export const WS_PLAYER_RESPONSE = "Player number: ";
@@ -133,7 +130,7 @@ export default {
     WebFrame,
     LoadingIcon,
     PlayerStone,
-    HexTile
+    HexTile,
   },
   data() {
     return {
@@ -147,15 +144,15 @@ export default {
       snackbar: false,
       msg: String,
       gameOverMessage: String,
-      showModal: false
+      showModal: false,
     };
   },
   mounted() {
     fetch("http://" + SERVER_URL + "/game", {
       method: "GET",
       headers: {
-        Accept: "application/json"
-      }
+        Accept: "application/json",
+      },
     })
       .then((res) => {
         if (res.ok) {
@@ -219,16 +216,17 @@ export default {
         method: "POST",
         headers: {
           Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: ""
+        body: "",
       });
 
       if (res.ok) {
-        if (clickSound.paused)
-          await clickSound.play();
-        else
-          clickSound.currentTime = 0;
+        if (this.$refs.frame.soundToggle) {
+          if (clickSound.paused) await clickSound.play();
+          else clickSound.currentTime = 0;
+        }
+
         this.socket.send(
           `Action done: ${action} -> Response: ${await res.text()}`
         );
@@ -268,7 +266,10 @@ export default {
     },
 
     gameOver: function() {
-      gameOverSound.play();
+
+      if (this.$refs.frame.soundToggle)
+        gameOverSound.play();
+
       this.gameOverMessage =
         this.counter1 > this.counter2
           ? "Player 1 wins!"
@@ -325,15 +326,15 @@ export default {
     },
 
     triggerToast: function(msg) {
-      if (errorSound.paused)
-        errorSound.play();
-      else
-        errorSound.currentTime = 0;
+      if (this.$refs.frame.soundToggle) {
+        if (errorSound.paused) errorSound.play();
+        else errorSound.currentTime = 0;
+      }
 
       this.msg = msg;
       this.snackbar = true;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -28,7 +28,6 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import {
   faGear,
-  faGem,
   faInfo,
   faSpinner,
   faVolumeHigh,
@@ -46,7 +45,6 @@ import {
   faPaperPlane,
   faWifi,
 } from "@fortawesome/free-solid-svg-icons";
-import { faGem as fG } from "@fortawesome/free-regular-svg-icons";
 
 /* add icons to the library */
 library.add(faGithub);
@@ -55,8 +53,6 @@ library.add(faVolumeXmark);
 library.add(faGear);
 library.add(faInfo);
 library.add(faSpinner);
-library.add(faGem);
-library.add(fG);
 library.add(faGamepad);
 library.add(faAddressCard);
 library.add(faBars);

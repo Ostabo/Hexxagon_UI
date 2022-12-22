@@ -133,6 +133,10 @@
                 </font-awesome-icon>
                 Help
               </button>
+              <SoundToggle
+                :sound-toggle="soundToggle"
+                @toggleSound="toggleSound()"
+              ></SoundToggle>
             </div>
           </div>
         </div>
@@ -262,10 +266,21 @@
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import ChatPopup from "@/components/ChatPopup.vue";
+import SoundToggle from "@/components/SoundToggle.vue";
 
 export default {
   name: "WebFrame",
-  components: { ChatPopup, FontAwesomeIcon }
+  components: { SoundToggle, ChatPopup, FontAwesomeIcon },
+  data() {
+    return {
+      soundToggle: true,
+    };
+  },
+  methods: {
+    toggleSound() {
+      this.soundToggle = !this.soundToggle;
+    },
+  },
 };
 </script>
 
@@ -275,7 +290,10 @@ export default {
   src: url("src/assets/Hexa.ttf");
 }
 
-nav .nav-link, footer, main textarea, .container {
+nav .nav-link,
+footer,
+main textarea,
+.container {
   color: white;
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <WebFrame>
+  <WebFrame ref="frame">
     <div class="container">
       <h1 class="p-3">Welcome to Hexxagon!</h1>
       <div class="game-container">
@@ -58,33 +58,25 @@
 <script>
 import HexTile from "@/components/HexTile.vue";
 import PlayerStone from "@/components/PlayerStone.vue";
-import LoadingIcon from "@/components/LoadingIcon.vue";
 import WebFrame from "@/views/WebFrame.vue";
 import ResetModal from "@/components/ResetModal.vue";
 import SaveModal from "@/components/SaveModal.vue";
 import LoadModal from "@/components/LoadModal.vue";
-import GameOverModal from "@/components/GameOverModal.vue";
 import { clickSound, errorSound, gameOverSound } from "@/main";
 
 export const availableTurns = ["X", "O"];
 export const EMPTY = "E";
-export const statusText = [
-  "Turn Player 1",
-  "Turn Player 2",
-  "GAME OVER"
-];
+export const statusText = ["Turn Player 1", "Turn Player 2", "GAME OVER"];
 
 export default {
   name: "GameView",
   components: {
-    GameOverModal,
     LoadModal,
     SaveModal,
     ResetModal,
     WebFrame,
-    LoadingIcon,
     PlayerStone,
-    HexTile
+    HexTile,
   },
   data() {
     return {
@@ -97,7 +89,7 @@ export default {
       hexField: new Map(),
       neighbors: new Map(),
       columns: 9,
-      rows: 6
+      rows: 6,
     };
   },
   beforeMount() {
@@ -108,18 +100,68 @@ export default {
       for (let i = 1; i <= this.rows; i++) {
         for (let j = 1; j <= this.columns; j++) {
           this.hexField.set(`${i}:${j}`, EMPTY);
-          this.neighbors.set(`${i}:${j}`, i === 1 && j === 1 ? [`${i}:${j + 1}`, `${i + 1}:${j}`]
-            : i === 1 && j === this.columns ? [`${i}:${j - 1}`, `${i + 1}:${j}`]
-              : i === this.rows && j === 1 ? [`${i}:${j + 1}`, `${i - 1}:${j + 1}`, `${i - 1}:${j}`]
-                : i === this.rows && j === this.columns ? [`${i}:${j - 1}`, `${i - 1}:${j - 1}`, `${i - 1}:${j}`]
-                  : i === 1 ? j % 2 === 0 ? [`${i}:${j - 1}`, `${i}:${j + 1}`, `${i + 1}:${j - 1}`, `${i + 1}:${j + 1}`, `${i + 1}:${j}`]
-                      : [`${i}:${j - 1}`, `${i}:${j + 1}`, `${i + 1}:${j}`]
-                    : i === this.rows ? j % 2 === 0 ? [`${i}:${j - 1}`, `${i}:${j + 1}`, `${i - 1}:${j}`]
-                        : [`${i}:${j - 1}`, `${i}:${j + 1}`, `${i - 1}:${j - 1}`, `${i - 1}:${j + 1}`, `${i - 1}:${j}`]
-                      : j === 1 ? [`${i - 1}:${j}`, `${i + 1}:${j}`, `${i}:${j + 1}`, `${i - 1}:${j + 1}`]
-                        : j === this.columns ? [`${i - 1}:${j}`, `${i - 1}:${j - 1}`, `${i}:${j - 1}`, `${i + 1}:${j}`]
-                          : j % 2 === 0 ? [`${i}:${j - 1}`, `${i}:${j + 1}`, `${i - 1}:${j}`, `${i + 1}:${j}`, `${i + 1}:${j - 1}`, `${i + 1}:${j + 1}`]
-                            : [`${i}:${j - 1}`, `${i}:${j + 1}`, `${i - 1}:${j}`, `${i + 1}:${j}`, `${i - 1}:${j - 1}`, `${i - 1}:${j + 1}`]);
+          this.neighbors.set(
+            `${i}:${j}`,
+            i === 1 && j === 1
+              ? [`${i}:${j + 1}`, `${i + 1}:${j}`]
+              : i === 1 && j === this.columns
+                ? [`${i}:${j - 1}`, `${i + 1}:${j}`]
+                : i === this.rows && j === 1
+                  ? [`${i}:${j + 1}`, `${i - 1}:${j + 1}`, `${i - 1}:${j}`]
+                  : i === this.rows && j === this.columns
+                    ? [`${i}:${j - 1}`, `${i - 1}:${j - 1}`, `${i - 1}:${j}`]
+                    : i === 1
+                      ? j % 2 === 0
+                        ? [
+                          `${i}:${j - 1}`,
+                          `${i}:${j + 1}`,
+                          `${i + 1}:${j - 1}`,
+                          `${i + 1}:${j + 1}`,
+                          `${i + 1}:${j}`,
+                        ]
+                        : [`${i}:${j - 1}`, `${i}:${j + 1}`, `${i + 1}:${j}`]
+                      : i === this.rows
+                        ? j % 2 === 0
+                          ? [`${i}:${j - 1}`, `${i}:${j + 1}`, `${i - 1}:${j}`]
+                          : [
+                            `${i}:${j - 1}`,
+                            `${i}:${j + 1}`,
+                            `${i - 1}:${j - 1}`,
+                            `${i - 1}:${j + 1}`,
+                            `${i - 1}:${j}`,
+                          ]
+                        : j === 1
+                          ? [
+                            `${i - 1}:${j}`,
+                            `${i + 1}:${j}`,
+                            `${i}:${j + 1}`,
+                            `${i - 1}:${j + 1}`,
+                          ]
+                          : j === this.columns
+                            ? [
+                              `${i - 1}:${j}`,
+                              `${i - 1}:${j - 1}`,
+                              `${i}:${j - 1}`,
+                              `${i + 1}:${j}`,
+                            ]
+                            : j % 2 === 0
+                              ? [
+                                `${i}:${j - 1}`,
+                                `${i}:${j + 1}`,
+                                `${i - 1}:${j}`,
+                                `${i + 1}:${j}`,
+                                `${i + 1}:${j - 1}`,
+                                `${i + 1}:${j + 1}`,
+                              ]
+                              : [
+                                `${i}:${j - 1}`,
+                                `${i}:${j + 1}`,
+                                `${i - 1}:${j}`,
+                                `${i + 1}:${j}`,
+                                `${i - 1}:${j - 1}`,
+                                `${i - 1}:${j + 1}`,
+                              ]
+          );
         }
       }
     },
@@ -128,24 +170,28 @@ export default {
     },
     clickTile(i, n) {
       if (this.hexField.get(`${i}:${n}`) !== EMPTY) {
-        if (errorSound.paused)
-          errorSound.play();
-        else
-          errorSound.currentTime = 0;
+        if (this.$refs.frame.soundToggle) {
+          if (errorSound.paused) errorSound.play();
+          else errorSound.currentTime = 0;
+        }
 
         this.triggerToast("Occupied!");
         return;
       }
-      if (clickSound.paused)
-        clickSound.play();
-      else
-        clickSound.currentTime = 0;
+
+      if (this.$refs.frame.soundToggle) {
+        if (clickSound.paused) clickSound.play();
+        else clickSound.currentTime = 0;
+      }
 
       this.hexField.set(`${i}:${n}`, this.turn);
       let addPoints = 1;
       let subPoints = 0;
-      this.neighbors.get(`${i}:${n}`).forEach(neighbor => {
-        if (this.hexField.get(neighbor) !== this.turn && this.hexField.get(neighbor) !== EMPTY) {
+      this.neighbors.get(`${i}:${n}`).forEach((neighbor) => {
+        if (
+          this.hexField.get(neighbor) !== this.turn &&
+          this.hexField.get(neighbor) !== EMPTY
+        ) {
           this.hexField.set(neighbor, this.turn);
           addPoints++;
           subPoints++;
@@ -163,14 +209,20 @@ export default {
       this.turn = availableTurns[nextTurn];
       this.gameStatus = statusText[nextTurn];
 
-      if (Number(this.counter1) + Number(this.counter2) === this.rows * this.columns) {
+      if (
+        Number(this.counter1) + Number(this.counter2) ===
+        this.rows * this.columns
+      ) {
         this.gameOver();
         this.gameStatus = statusText[2];
       }
     },
 
     gameOver: function() {
-      gameOverSound.play();
+
+      if (this.$refs.frame.soundToggle)
+        gameOverSound.play();
+
       const gameOverMessage =
         this.counter1 > this.counter2
           ? "Player 1 wins!"
@@ -184,8 +236,8 @@ export default {
     triggerToast: function(msg) {
       this.msg = msg;
       this.snackbar = true;
-    }
-  }
+    },
+  },
 };
 </script>
 

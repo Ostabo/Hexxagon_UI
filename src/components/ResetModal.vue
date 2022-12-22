@@ -48,14 +48,14 @@ import { apiPost } from "@/assets/api";
 export default {
   name: "ResetModal",
   methods: {
-    reset: function() {
+    reset: function () {
       apiPost("reset").then((res) => {
         if (res.ok) {
           location.reload();
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
