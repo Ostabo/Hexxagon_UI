@@ -66,7 +66,7 @@
               </a>
               <ul
                 aria-labelledby="navbarDarkDropdownMenuLink"
-                class="dropdown-menu dropdown-menu-dark"
+                class="dropdown-menu"
               >
                 <li>
                   <a class="dropdown-item" href="/game-plain">Game Plain</a>
@@ -248,8 +248,8 @@
             <a href="https://github.com/Ostabo/Hexxagon-WA">
               <img
                 alt="Github"
-                class="w-100"
-                src="@/assets/images/GitHub_Logo_White.png"
+                class="w-75 pb-4"
+                src="@/assets/images/GitHub_Logo.png"
               />
             </a>
           </div>
@@ -263,45 +263,9 @@
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import ChatPopup from "@/components/ChatPopup.vue";
 
-const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-
 export default {
   name: "WebFrame",
-  components: { ChatPopup, FontAwesomeIcon },
-  data() {
-    return {
-      isCollapsed: true
-    };
-  },
-  mounted() {
-    const theme = localStorage.getItem("theme");
-    if (theme === "dark" || (theme === null && prefersDarkScheme.matches)) {
-      document.documentElement.classList.add("dark-theme");
-      document.documentElement.classList.remove("light-theme");
-      // document.getElementById("toggle").checked = true;
-      // document.getElementById("toggle-container").title = "Dark";
-    } else {
-      document.documentElement.classList.add("light-theme");
-      document.documentElement.classList.remove("dark-theme");
-      // document.getElementById("toggle").checked = false;
-      // document.getElementById("toggle-container").title = "Light";
-    }
-  },
-  methods: {
-    themeInit() {
-    },
-    toggleTheme() {
-      document.documentElement.classList.toggle("dark-theme");
-      document.documentElement.classList.toggle("light-theme");
-      if (document.documentElement.classList.contains("dark-theme")) {
-        document.getElementById("toggle-container").title = "Dark";
-        localStorage.setItem("theme", "dark");
-      } else {
-        document.getElementById("toggle-container").title = "Light";
-        localStorage.setItem("theme", "light");
-      }
-    }
-  }
+  components: { ChatPopup, FontAwesomeIcon }
 };
 </script>
 
@@ -311,44 +275,8 @@ export default {
   src: url("src/assets/Hexa.ttf");
 }
 
-.light-theme {
-  textarea,
-  .dropdown-menu-dark,
-  .modal-content,
-  main,
-  .card:not(:is(section .card)),
-  .toast-container *,
-  #chat {
-    background: rgb(185, 185, 185);
-    color: black;
-  }
-
-  .main-body,
-  footer,
-  nav,
-  a {
-    color: black;
-  }
-}
-
-.dark-theme {
-  textarea,
-  .dropdown-menu-dark,
-  .modal-content,
-  main,
-  .card:not(:is(section .card)),
-  .toast-container *,
-  #chat {
-    background: rgba(40, 40, 40, 1);
-    color: white;
-  }
-
-  .main-body,
-  footer,
-  nav,
-  a {
-    color: white;
-  }
+nav .nav-link, footer, main textarea, .container {
+  color: white;
 }
 
 @keyframes fade-in {

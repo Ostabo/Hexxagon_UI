@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div class="dropup actionbutton text-capitalize p-4">
+      <div class="dropup actionbutton text-capitalize p-3">
         <button
           id="dropdownMenuButton"
           aria-expanded="false"
@@ -47,7 +47,7 @@
         </button>
         <div
           aria-labelledby="dropdownMenuButton"
-          class="dropdown-menu dropdown-menu-dark"
+          class="dropdown-menu"
         >
           <a id="undo" class="dropdown-item" @click="doAction('undo')">undo</a>
           <a id="redo" class="dropdown-item" @click="doAction('redo')">redo</a>
@@ -56,21 +56,21 @@
             class="dropdown-item"
             data-bs-target="#saveModal"
             data-bs-toggle="modal"
-            >save</a
+          >save</a
           >
           <a
             id="load"
             class="dropdown-item"
             data-bs-target="#loadModal"
             data-bs-toggle="modal"
-            >load</a
+          >load</a
           >
           <a
             id="reset"
             class="dropdown-item"
             data-bs-target="#resetModal"
             data-bs-toggle="modal"
-            >reset</a
+          >reset</a
           >
         </div>
       </div>
@@ -81,7 +81,7 @@
   <LoadModal></LoadModal>
   <GameOverModal :msg="gameOverMessage" :shown="showModal"></GameOverModal>
 
-  <v-snackbar v-model="snackbar">
+  <v-snackbar v-model="snackbar" color="white">
     <font-awesome-icon
       class="mt-1 mx-lg-2 fs-2"
       icon="triangle-exclamation"
@@ -116,7 +116,7 @@ export const statusText = [
   "GAME OVER",
   "Your turn",
   "Waiting for other player...",
-  "You are spectator",
+  "You are spectator"
 ];
 export const WS_PLAYER_REQUEST = "Requesting player number";
 export const WS_PLAYER_RESPONSE = "Player number: ";
@@ -133,7 +133,7 @@ export default {
     WebFrame,
     LoadingIcon,
     PlayerStone,
-    HexTile,
+    HexTile
   },
   data() {
     return {
@@ -147,15 +147,15 @@ export default {
       snackbar: false,
       msg: String,
       gameOverMessage: String,
-      showModal: false,
+      showModal: false
     };
   },
   mounted() {
     fetch("http://" + SERVER_URL + "/game", {
       method: "GET",
       headers: {
-        Accept: "application/json",
-      },
+        Accept: "application/json"
+      }
     })
       .then((res) => {
         if (res.ok) {
@@ -214,14 +214,14 @@ export default {
     if (this.socket) this.socket.close();
   },
   methods: {
-    doAction: async function (action) {
+    doAction: async function(action) {
       const res = await fetch(`http://${SERVER_URL}/` + action, {
         method: "POST",
         headers: {
           Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: "",
+        body: ""
       });
 
       if (res.ok)
@@ -230,7 +230,7 @@ export default {
         );
       else this.triggerToast(await res.text());
     },
-    clickTile: async function (row, col) {
+    clickTile: async function(row, col) {
       switch (this.playerNumber) {
         case "1":
         case "2":
@@ -243,7 +243,7 @@ export default {
       }
     },
 
-    updateGame: function (fieldRes) {
+    updateGame: function(fieldRes) {
       // update the page
       this.updateCounter(fieldRes);
       // only update status for playing users
@@ -262,25 +262,25 @@ export default {
       }
     },
 
-    gameOver: function () {
+    gameOver: function() {
       this.gameOverMessage =
         this.counter1 > this.counter2
-          ? "Player 1 🔷 wins!"
+          ? "Player 1 wins!"
           : this.counter1 < this.counter2
-          ? "Player 2 🔴 wins!"
-          : "It's a draw! ⚪";
+            ? "Player 2 wins!"
+            : "It's a draw!";
 
       this.showModal = true;
     },
 
-    getCell: function (row, col) {
+    getCell: function(row, col) {
       const cell = this.game.field.cells.find(
         (cell) => cell.row === row && cell.col === col
       );
       return cell?.cell ? cell.cell : " ";
     },
 
-    initStatus: function () {
+    initStatus: function() {
       switch (this.playerNumber) {
         case "1": // player 1 always starts <- bad
           this.gameStatus = statusText[1];
@@ -294,7 +294,7 @@ export default {
       }
     },
 
-    updateStatus: function (turn) {
+    updateStatus: function(turn) {
       switch (turn.toString()) {
         case "0": // game over
           this.gameStatus = statusText[0];
@@ -308,21 +308,21 @@ export default {
       }
     },
 
-    updateCounter: function (json) {
+    updateCounter: function(json) {
       // update the page elements
       this.counter1 = json.xcount;
       this.counter2 = json.ocount;
     },
 
-    updateField: function (json) {
+    updateField: function(json) {
       this.game = Field.from(json);
     },
 
-    triggerToast: function (msg) {
+    triggerToast: function(msg) {
       this.msg = msg;
       this.snackbar = true;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -347,7 +347,7 @@ export default {
   align-content: center;
   justify-content: space-between;
   min-width: 50%;
-  margin-bottom: 2em;
+  margin-bottom: 1.8em;
 }
 
 .tileRow {

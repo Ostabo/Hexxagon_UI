@@ -123,9 +123,7 @@ export default {
       }
     },
     content(x, y) {
-      const res = this.hexField.get(`${x}:${y}`);
-      console.log(res);
-      return res;
+      return this.hexField.get(`${x}:${y}`);
     },
     clickTile(i, n) {
       if (this.hexField.get(`${i}:${n}`) !== EMPTY) {
@@ -163,10 +161,10 @@ export default {
     gameOver: function() {
       const gameOverMessage =
         this.counter1 > this.counter2
-          ? "Player 1 🔵 wins!"
+          ? "Player 1 wins!"
           : this.counter1 < this.counter2
-            ? "Player 2 🔴 wins!"
-            : "It's a draw! ⚪";
+            ? "Player 2 wins!"
+            : "It's a draw!";
 
       this.triggerToast(gameOverMessage);
     },

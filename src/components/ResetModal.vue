@@ -31,8 +31,8 @@
           <button
             class="btn btn-primary"
             data-bs-dismiss="modal"
-            @click="reset()"
             type="button"
+            @click="reset()"
           >
             Continue
           </button>
@@ -48,10 +48,14 @@ import { apiPost } from "@/assets/api";
 export default {
   name: "ResetModal",
   methods: {
-    reset: function () {
-      apiPost("reset");
-    },
-  },
+    reset: function() {
+      apiPost("reset").then((res) => {
+        if (res.ok) {
+          location.reload();
+        }
+      });
+    }
+  }
 };
 </script>
 
