@@ -76,8 +76,7 @@
   <ResetModal></ResetModal>
   <SaveModal></SaveModal>
   <LoadModal></LoadModal>
-  <GameOverModal :msg="gameOverMessage" :shown="showModal"></GameOverModal>
-
+  <GameOverModal v-model="gameOverModal" :winner="winner" @close="gameOverModal = false"></GameOverModal>
   <v-snackbar v-model="snackbar" color="white">
     <font-awesome-icon
       class="mt-1 mx-lg-2 fs-2"
@@ -143,8 +142,8 @@ export default {
       game: undefined,
       snackbar: false,
       msg: String,
-      gameOverMessage: String,
-      showModal: false,
+      gameOverModal: false,
+      winner: Number
     };
   },
   mounted() {
@@ -270,14 +269,14 @@ export default {
       if (this.$refs.frame.soundToggle)
         gameOverSound.play();
 
-      this.gameOverMessage =
+      this.winner =
         this.counter1 > this.counter2
-          ? "Player 1 wins!"
+          ? 1
           : this.counter1 < this.counter2
-            ? "Player 2 wins!"
-            : "It's a draw!";
+            ? 2
+            : 0;
 
-      this.showModal = true;
+      this.gameOverModal = true;
     },
 
     getCell: function(row, col) {
