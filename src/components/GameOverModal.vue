@@ -1,12 +1,11 @@
 <template>
   <v-dialog>
-    <v-card class="mx-auto" color="grey-darken-4">
-      <v-card-title class="headline">GAME OVER</v-card-title>
+    <v-card class="mx-auto text-center hexa">
+      <v-card-title class="headline text-h4 py-lg-3">GAME OVER</v-card-title>
+      <v-card-subtitle class="text-h5 py-lg-1">
+        {{ winner === 0 ? "It's a tie!" : "Player " + winner + " wins!" }}
+      </v-card-subtitle>
       <v-card-text>
-        <h5 class="modal-title" id="game-over-content">
-          {{ winner === 0 ? "It's a tie!" : "Player " + winner + " wins!" }}
-        </h5><br>
-
         To start a new game, click on the reset button in the action menu.
         Thanks for playing!
       </v-card-text>
@@ -26,20 +25,26 @@ export default {
   props: {
     winner: {
       type: Number,
-      required: true,
+      required: true
     }
   },
   methods: {
-    reset: function () {
+    reset: function() {
       apiPost("reset").then((res) => {
-            if (res.ok) {
-              location.reload();
-            }
-          });
+        if (res.ok) {
+          location.reload();
+        }
+      });
     },
-    close: function () {
+    close: function() {
       this.$emit("close");
     }
-  },
+  }
 };
 </script>
+
+<style lang="scss" scoped>
+.hexa *:is(.text-h4, .text-h5) {
+  font-family: Hexa, serif !important;
+}
+</style>
