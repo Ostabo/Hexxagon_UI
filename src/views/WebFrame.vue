@@ -100,7 +100,7 @@
               </font-awesome-icon>
             </button>
             <div aria-labelledby="dropdownChat" class="dropdown-menu p-0">
-              <ChatPopup></ChatPopup>
+              <ChatPopup :disabled="chatToggle"></ChatPopup>
             </div>
           </div>
           <div class="dropdown mr-3 my-1">
@@ -133,6 +133,10 @@
                 </font-awesome-icon>
                 Help
               </button>
+              <ChatConfig
+                :chat-toggle="!chatToggle"
+                @toggleChat="toggleChat()"
+              ></ChatConfig>
               <SoundToggle
                 :sound-toggle="soundToggle"
                 @toggleSound="toggleSound()"
@@ -267,18 +271,23 @@
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import ChatPopup from "@/components/ChatPopup.vue";
 import SoundToggle from "@/components/SoundToggle.vue";
+import ChatConfig from "@/components/ChatConfig.vue";
 
 export default {
   name: "WebFrame",
-  components: { SoundToggle, ChatPopup, FontAwesomeIcon },
+  components: { ChatConfig, SoundToggle, ChatPopup, FontAwesomeIcon },
   data() {
     return {
       soundToggle: true,
+      chatToggle: true,
     };
   },
   methods: {
     toggleSound() {
       this.soundToggle = !this.soundToggle;
+    },
+    toggleChat() {
+      this.chatToggle = !this.chatToggle;
     },
   },
 };

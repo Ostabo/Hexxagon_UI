@@ -25,21 +25,21 @@ export default {
   props: {
     winner: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
-    reset: function() {
+    reset: function () {
       apiPost("reset").then((res) => {
         if (res.ok) {
           location.reload();
         }
       });
     },
-    close: function() {
+    close: function () {
       this.$emit("close");
-    }
-  }
+    },
+  },
 };
 </script>
 

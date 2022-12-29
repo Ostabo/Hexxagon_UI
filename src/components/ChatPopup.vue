@@ -1,9 +1,17 @@
 <template>
-  <div id="chat" class="card">
+  <div id="chat" :class="{ disabled: disabled }" class="card">
     <div
       class="card-header d-flex justify-content-between align-items-center p-3"
     >
       <h5 class="mb-0">Chat</h5>
+      <button class="btn btn-light" @click="triggerRefresh()">
+        <font-awesome-icon
+          :spin="spin"
+          icon="refresh"
+          size="lg"
+          style="--fa-animation-duration: 1.2s"
+        />
+      </button>
     </div>
     <div
       id="chat-box"
@@ -15,12 +23,17 @@
     >
       <input
         id="chat-input"
+        :disabled="disabled"
         class="form-control w-100"
         placeholder="Type message"
         type="text"
         v-on:keyup.enter="sendChatMsg"
       />
-      <button class="btn btn-light ms-3" v-on:click="sendChatMsg">
+      <button
+        :disabled="disabled"
+        class="btn btn-light ms-3"
+        v-on:click="sendChatMsg"
+      >
         <font-awesome-icon class="mt-1" icon="paper-plane" size="1x">
         </font-awesome-icon>
       </button>
@@ -30,17 +43,50 @@
 
 <script>
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 let previousText = "";
 let noError = false;
 
 export default {
   name: "ChatPopup",
+  components: { FontAwesomeIcon },
+  data() {
+    return {
+      spin: false,
+    };
+  },
+  props: {
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
+  watch: {
+    disabled: {
+      handler(newVal) {
+        if (!newVal) {
+          this.initChat();
+        }
+      },
+      immediate: true,
+    },
+  },
   mounted() {
     this.initChat();
   },
   methods: {
+    triggerRefresh() {
+      this.spin = true;
+      setTimeout(() => {
+        this.spin = false;
+      }, 1000);
+      this.initChat();
+    },
     initChat() {
+      if (this.disabled) return;
+
       axios
         .get("http://localhost:9000/chat")
         .then((response) => {
@@ -54,6 +100,7 @@ export default {
           }
         })
         .finally(() => {
+          if (this.disabled) return;
           if (noError) {
             setTimeout(() => {
               this.initChat();
@@ -128,5 +175,16 @@ export default {
   flex-direction: column;
   min-width: 15vw;
   height: 30vh;
+}
+
+.disabled:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(168, 154, 154, 0.5);
+  z-index: 1;
 }
 </style>

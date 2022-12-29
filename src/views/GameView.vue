@@ -53,21 +53,21 @@
             class="dropdown-item"
             data-bs-target="#saveModal"
             data-bs-toggle="modal"
-          >save</a
+            >save</a
           >
           <a
             id="load"
             class="dropdown-item"
             data-bs-target="#loadModal"
             data-bs-toggle="modal"
-          >load</a
+            >load</a
           >
           <a
             id="reset"
             class="dropdown-item"
             data-bs-target="#resetModal"
             data-bs-toggle="modal"
-          >reset</a
+            >reset</a
           >
         </div>
       </div>
@@ -76,7 +76,11 @@
   <ResetModal></ResetModal>
   <SaveModal></SaveModal>
   <LoadModal></LoadModal>
-  <GameOverModal v-model="gameOverModal" :winner="winner" @close="gameOverModal = false"></GameOverModal>
+  <GameOverModal
+    v-model="gameOverModal"
+    :winner="winner"
+    @close="gameOverModal = false"
+  ></GameOverModal>
   <v-snackbar v-model="snackbar" color="white">
     <font-awesome-icon
       class="mt-1 mx-lg-2 fs-2"
@@ -143,7 +147,7 @@ export default {
       snackbar: false,
       msg: String,
       gameOverModal: false,
-      winner: Number
+      winner: Number,
     };
   },
   mounted() {
@@ -210,7 +214,7 @@ export default {
     if (this.socket) this.socket.close();
   },
   methods: {
-    doAction: async function(action) {
+    doAction: async function (action) {
       const res = await fetch(`http://${SERVER_URL}/` + action, {
         method: "POST",
         headers: {
@@ -232,7 +236,7 @@ export default {
       } else this.triggerToast(await res.text());
     },
 
-    clickTile: async function(row, col) {
+    clickTile: async function (row, col) {
       switch (this.playerNumber) {
         case "1":
         case "2":
@@ -245,7 +249,7 @@ export default {
       }
     },
 
-    updateGame: function(fieldRes) {
+    updateGame: function (fieldRes) {
       // update the page
       this.updateCounter(fieldRes);
       // only update status for playing users
@@ -264,29 +268,27 @@ export default {
       }
     },
 
-    gameOver: function() {
-
-      if (this.$refs.frame.soundToggle)
-        gameOverSound.play();
+    gameOver: function () {
+      if (this.$refs.frame.soundToggle) gameOverSound.play();
 
       this.winner =
         this.counter1 > this.counter2
           ? 1
           : this.counter1 < this.counter2
-            ? 2
-            : 0;
+          ? 2
+          : 0;
 
       this.gameOverModal = true;
     },
 
-    getCell: function(row, col) {
+    getCell: function (row, col) {
       const cell = this.game.field.cells.find(
         (cell) => cell.row === row && cell.col === col
       );
       return cell?.cell ? cell.cell : " ";
     },
 
-    initStatus: function() {
+    initStatus: function () {
       switch (this.playerNumber) {
         case "1": // player 1 always starts <- bad
           this.gameStatus = statusText[1];
@@ -300,7 +302,7 @@ export default {
       }
     },
 
-    updateStatus: function(turn) {
+    updateStatus: function (turn) {
       switch (turn.toString()) {
         case "0": // game over
           this.gameStatus = statusText[0];
@@ -314,17 +316,17 @@ export default {
       }
     },
 
-    updateCounter: function(json) {
+    updateCounter: function (json) {
       // update the page elements
       this.counter1 = json.xcount;
       this.counter2 = json.ocount;
     },
 
-    updateField: function(json) {
+    updateField: function (json) {
       this.game = Field.from(json);
     },
 
-    triggerToast: function(msg) {
+    triggerToast: function (msg) {
       if (this.$refs.frame.soundToggle) {
         if (errorSound.paused) errorSound.play();
         else errorSound.currentTime = 0;

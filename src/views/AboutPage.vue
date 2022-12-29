@@ -168,7 +168,7 @@
         </div>
       </section>
 
-      <div class="container text-start">
+      <div class="text-start">
         <div class="row m-lg-5">
           <div class="card col-md m-lg-5 p-0">
             <h5 class="card-header">The Game</h5>

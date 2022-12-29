@@ -44,6 +44,8 @@ import {
   faQuoteLeft,
   faPaperPlane,
   faWifi,
+  faX,
+  faRefresh,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
@@ -65,6 +67,8 @@ library.add(faTriangleExclamation);
 library.add(faQuoteLeft);
 library.add(faPaperPlane);
 library.add(faWifi);
+library.add(faX);
+library.add(faRefresh);
 
 const [cS, eS] = ["/click-good.wav", "/click-bad.wav"];
 export const clickSound = new Audio(cS);

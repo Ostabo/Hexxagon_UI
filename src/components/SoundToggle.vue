@@ -4,9 +4,19 @@
     type="button"
     @click="toggleSound()"
   >
-    <font-awesome-icon v-if="soundToggle" class="text-black" icon="volume-high" size="lg">
+    <font-awesome-icon
+      v-if="soundToggle"
+      class="text-black"
+      icon="volume-high"
+      size="lg"
+    >
     </font-awesome-icon>
-    <font-awesome-icon v-else-if="!soundToggle" class="text-red" icon="volume-xmark" size="lg">
+    <font-awesome-icon
+      v-else-if="!soundToggle"
+      class="text-red"
+      icon="volume-xmark"
+      size="lg"
+    >
     </font-awesome-icon>
   </button>
 </template>
@@ -20,14 +30,14 @@ export default {
   props: {
     soundToggle: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     toggleSound() {
       this.$emit("toggleSound");
-    }
-  }
+    },
+  },
 };
 </script>
 
