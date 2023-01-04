@@ -70,12 +70,17 @@ library.add(faWifi);
 library.add(faX);
 library.add(faRefresh);
 
-const [cS, eS] = ["/click-good.wav", "/click-bad.wav"];
+const [cS, eS] = [
+  import.meta.env.BASE_URL + "/click-good.wav",
+  import.meta.env.BASE_URL + "/click-bad.wav",
+];
 export const clickSound = new Audio(cS);
 clickSound.volume = 0.4;
 export const errorSound = new Audio(eS);
 errorSound.volume = 0.4;
-export const gameOverSound = new Audio("/game-over.wav");
+export const gameOverSound = new Audio(
+  import.meta.env.BASE_URL + "/game-over.wav"
+);
 gameOverSound.volume = 0.4;
 
 export const SERVER_URL = "localhost:9000";
