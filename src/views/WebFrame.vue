@@ -69,10 +69,14 @@
                 class="dropdown-menu"
               >
                 <li>
-                  <RouterLink class="dropdown-item" to="/game-plain">Game Plain</RouterLink>
+                  <RouterLink class="dropdown-item" to="/game-plain"
+                    >Game Plain</RouterLink
+                  >
                 </li>
                 <li>
-                  <RouterLink class="dropdown-item" to="/status-plain">Game Status</RouterLink>
+                  <RouterLink class="dropdown-item" to="/status-plain"
+                    >Game Status</RouterLink
+                  >
                 </li>
               </ul>
             </li>
@@ -279,7 +283,7 @@ export default {
   data() {
     return {
       soundToggle: true,
-      chatToggle: true
+      chatToggle: true,
     };
   },
   methods: {
@@ -288,8 +292,8 @@ export default {
     },
     toggleChat() {
       this.chatToggle = !this.chatToggle;
-    }
-  }
+    },
+  },
 };
 </script>
 

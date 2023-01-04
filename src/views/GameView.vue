@@ -1,7 +1,7 @@
 <template>
-  <LoadingIcon v-if="loading"></LoadingIcon>
-  <WebFrame v-else ref="frame">
-    <div class="container">
+  <WebFrame ref="frame">
+    <LoadingIcon v-if="loading"></LoadingIcon>
+    <div v-else class="container">
       <h1 class="p-3">Welcome to Hexxagon!</h1>
       <div class="game-container">
         <div class="header">

@@ -1,10 +1,8 @@
+[![Pages](https://github.com/Ostabo/Hexxagon_UI/actions/workflows/build_deploy.yml/badge.svg?event=push)](https://ostabo.software/Hexxagon_UI/)
+
 # Hexxagon_UI
 
 This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
 ## Customize configuration
 
