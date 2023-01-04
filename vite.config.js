@@ -60,5 +60,5 @@ export default defineConfig({
     port: 8080,
     https: true,
   },
-  base: '/'
+  base: "/Hexxagon_UI/",
 });
