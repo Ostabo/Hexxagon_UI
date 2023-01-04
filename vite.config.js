@@ -25,6 +25,7 @@ export default defineConfig({
       manifest: {
         name: "Hexxagon",
         short_name: "Hex",
+        start_url: "index.html",
         icons: [
           {
             src: "/android-chrome-192x192.png",
@@ -59,4 +60,5 @@ export default defineConfig({
     port: 8080,
     https: true,
   },
+  base: '/'
 });
