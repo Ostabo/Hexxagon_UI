@@ -9,7 +9,7 @@
   <div class="main-body h-100">
     <nav class="navbar navbar-expand-sm navbar-dark border-bottom pb-2 fs-4">
       <div class="container">
-        <a class="navbar-brand" href="/">
+        <RouterLink class="navbar-brand" to="/">
           <img
             alt="logo"
             class="logo"
@@ -18,7 +18,7 @@
             src="/favicon.ico"
             width="40"
           />
-        </a>
+        </RouterLink>
         <button
           aria-controls="navbarNavAltMarkup"
           aria-label="Toggle navigation"
@@ -32,25 +32,25 @@
         <div id="n_bar" class="collapse navbar-collapse">
           <ul class="navbar-nav nav-fill">
             <li class="nav-item active">
-              <a class="nav-link" href="/">
+              <RouterLink class="nav-link" to="/">
                 <font-awesome-icon class="mt-1" icon="wifi" size="1x">
                 </font-awesome-icon>
                 Online
-              </a>
+              </RouterLink>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/local">
+              <RouterLink class="nav-link" to="/local">
                 <font-awesome-icon class="mt-1" icon="gamepad" size="1x">
                 </font-awesome-icon>
                 Local
-              </a>
+              </RouterLink>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/about">
+              <RouterLink class="nav-link" to="/about">
                 <font-awesome-icon class="mt-1" icon="info-circle" size="1x">
                 </font-awesome-icon>
                 About
-              </a>
+              </RouterLink>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -69,10 +69,10 @@
                 class="dropdown-menu"
               >
                 <li>
-                  <a class="dropdown-item" href="/game-plain">Game Plain</a>
+                  <RouterLink class="dropdown-item" to="/game-plain">Game Plain</RouterLink>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/status-plain">Game Status</a>
+                  <RouterLink class="dropdown-item" to="/status-plain">Game Status</RouterLink>
                 </li>
               </ul>
             </li>
@@ -279,7 +279,7 @@ export default {
   data() {
     return {
       soundToggle: true,
-      chatToggle: true,
+      chatToggle: true
     };
   },
   methods: {
@@ -288,8 +288,8 @@ export default {
     },
     toggleChat() {
       this.chatToggle = !this.chatToggle;
-    },
-  },
+    }
+  }
 };
 </script>
 
