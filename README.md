@@ -1,3 +1,4 @@
+[![Render](https://img.shields.io/badge/Render-Server-0fe0b6)](https://hexxagon-web-server.onrender.com)
 [![Pages](https://github.com/Ostabo/Hexxagon_UI/actions/workflows/build_deploy.yml/badge.svg?event=push)](https://ostabo.software/Hexxagon_UI/)
 
 # Hexxagon_UI
