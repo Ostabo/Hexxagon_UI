@@ -84,7 +84,7 @@ export const gameOverSound = new Audio(
 gameOverSound.volume = 0.4;
 
 export const SERVER_URL = import.meta.env.PROD
-  ? "https://hexxagon-web-server.onrender.com"
+  ? "hexxagon-web-server.onrender.com"
   : "localhost:9000";
 const app = createApp(App);
 
