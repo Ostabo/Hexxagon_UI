@@ -1,11 +1,4 @@
 <template>
-  <head>
-    <link
-      as="image"
-      href="@/assets/images/background-universe.jpg"
-      rel="prefetch"
-    />
-  </head>
   <div class="main-body h-100">
     <nav class="navbar navbar-expand-sm navbar-dark border-bottom pb-2 fs-4">
       <div class="container">

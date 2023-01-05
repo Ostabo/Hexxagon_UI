@@ -26,22 +26,28 @@ export default defineConfig({
         name: "Hexxagon",
         short_name: "Hex",
         start_url: "index.html",
+        id: "hexxagon_wa",
         icons: [
           {
-            src: "/android-chrome-192x192.png",
+            src: "/Hexxagon_UI/android-chrome-192x192.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "/android-chrome-512x512.png",
+            src: "/Hexxagon_UI/android-chrome-512x512.png",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "/android-chrome-512x512.png",
+            src: "/Hexxagon_UI/android-chrome-512x512.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",
+          },
+          {
+            src: "/Hexxagon_UI/apple-touch-icon.png",
+            sizes: "180x180",
+            type: "image/png",
           },
         ],
         theme_color: "#62abe7",
