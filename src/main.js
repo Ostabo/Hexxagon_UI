@@ -84,8 +84,12 @@ export const gameOverSound = new Audio(
 gameOverSound.volume = 0.4;
 
 export const SERVER_URL = import.meta.env.PROD
-  ? "hexxagon-web-server.onrender.com"
-  : "localhost:9000";
+  ? "https://hexxagon-web-server.onrender.com"
+  : "http://localhost:9000";
+export const SERVER_WS_URL = import.meta.env.PROD
+  ? "wss://hexxagon-web-server.onrender.com"
+  : "ws://localhost:9000";
+
 const app = createApp(App);
 
 app.component("font-awesome-icon", FontAwesomeIcon);

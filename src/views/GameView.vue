@@ -104,7 +104,7 @@ import { Field } from "@/assets/classes";
 import LoadingIcon from "@/components/LoadingIcon.vue";
 import WebFrame from "@/views/WebFrame.vue";
 import ResetModal from "@/components/ResetModal.vue";
-import { clickSound, errorSound, gameOverSound, SERVER_URL } from "@/main";
+import { clickSound, errorSound, gameOverSound, SERVER_URL, SERVER_WS_URL } from "@/main";
 import SaveModal from "@/components/SaveModal.vue";
 import LoadModal from "@/components/LoadModal.vue";
 import GameOverModal from "@/components/GameOverModal.vue";
@@ -149,7 +149,7 @@ export default {
     };
   },
   mounted() {
-    fetch("http://" + SERVER_URL + "/game", {
+    fetch(SERVER_URL + "/game", {
       method: "GET",
       headers: {
         Accept: "application/json"
@@ -170,7 +170,7 @@ export default {
         console.log(err);
       });
 
-    this.socket = new WebSocket("ws://" + SERVER_URL + "/ws");
+    this.socket = new WebSocket(SERVER_WS_URL + "/ws");
 
     this.socket.onopen = () => {
       console.log("WebSocket connection established");
@@ -213,7 +213,7 @@ export default {
   },
   methods: {
     doAction: async function(action) {
-      const res = await fetch(`http://${SERVER_URL}/` + action, {
+      const res = await fetch(`${SERVER_URL}/` + action, {
         method: "POST",
         headers: {
           Accept: "application/json, text/plain, */*",

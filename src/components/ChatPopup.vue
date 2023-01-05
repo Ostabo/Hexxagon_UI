@@ -44,6 +44,7 @@
 <script>
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { SERVER_URL } from "@/main";
 
 let previousText = "";
 let noError = false;
@@ -53,15 +54,15 @@ export default {
   components: { FontAwesomeIcon },
   data() {
     return {
-      spin: false,
+      spin: false
     };
   },
   props: {
     disabled: {
       type: Boolean,
       required: false,
-      default: false,
-    },
+      default: false
+    }
   },
   watch: {
     disabled: {
@@ -70,8 +71,8 @@ export default {
           this.initChat();
         }
       },
-      immediate: true,
-    },
+      immediate: true
+    }
   },
   mounted() {
     this.initChat();
@@ -88,7 +89,7 @@ export default {
       if (this.disabled) return;
 
       axios
-        .get("http://localhost:9000/chat")
+        .get(SERVER_URL + "/chat")
         .then((response) => {
           if (response.status === 200) {
             let res = response.data.toString();
@@ -118,8 +119,8 @@ export default {
       input.value = "";
 
       axios
-        .post("http://localhost:9000/chat", {
-          message: msg,
+        .post(SERVER_URL + "/chat", {
+          message: msg
         })
         .then((response) => {
           if (response.status === 200) {
@@ -162,8 +163,8 @@ export default {
       message.appendChild(msgTime);
 
       chatbox.append(message);
-    },
-  },
+    }
+  }
 };
 </script>
 
