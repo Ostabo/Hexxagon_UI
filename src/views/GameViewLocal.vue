@@ -6,16 +6,14 @@
         <div class="header">
           <h2 class="counter">
             <PlayerStone :player="'X'"></PlayerStone>
-            :
-            <span>{{ counter1 }}</span>
+            : {{ counter1 }}
           </h2>
           <h2 class="status">
             {{ gameStatus }}
           </h2>
           <h2 class="counter">
             <PlayerStone :player="'O'"></PlayerStone>
-            :
-            <span>{{ counter2 }}</span>
+            : {{ counter2 }}
           </h2>
         </div>
         <div v-for="rowInd in rows" :key="rowInd" class="row">
@@ -76,7 +74,7 @@ export default {
     ResetModal,
     WebFrame,
     PlayerStone,
-    HexTile,
+    HexTile
   },
   data() {
     return {
@@ -89,7 +87,7 @@ export default {
       hexField: new Map(),
       neighbors: new Map(),
       columns: 9,
-      rows: 6,
+      rows: 6
     };
   },
   beforeMount() {
@@ -105,62 +103,62 @@ export default {
             i === 1 && j === 1
               ? [`${i}:${j + 1}`, `${i + 1}:${j}`]
               : i === 1 && j === this.columns
-              ? [`${i}:${j - 1}`, `${i + 1}:${j}`]
-              : i === this.rows && j === 1
-              ? [`${i}:${j + 1}`, `${i - 1}:${j + 1}`, `${i - 1}:${j}`]
-              : i === this.rows && j === this.columns
-              ? [`${i}:${j - 1}`, `${i - 1}:${j - 1}`, `${i - 1}:${j}`]
-              : i === 1
-              ? j % 2 === 0
-                ? [
-                    `${i}:${j - 1}`,
-                    `${i}:${j + 1}`,
-                    `${i + 1}:${j - 1}`,
-                    `${i + 1}:${j + 1}`,
-                    `${i + 1}:${j}`,
-                  ]
-                : [`${i}:${j - 1}`, `${i}:${j + 1}`, `${i + 1}:${j}`]
-              : i === this.rows
-              ? j % 2 === 0
-                ? [`${i}:${j - 1}`, `${i}:${j + 1}`, `${i - 1}:${j}`]
-                : [
-                    `${i}:${j - 1}`,
-                    `${i}:${j + 1}`,
-                    `${i - 1}:${j - 1}`,
-                    `${i - 1}:${j + 1}`,
-                    `${i - 1}:${j}`,
-                  ]
-              : j === 1
-              ? [
-                  `${i - 1}:${j}`,
-                  `${i + 1}:${j}`,
-                  `${i}:${j + 1}`,
-                  `${i - 1}:${j + 1}`,
-                ]
-              : j === this.columns
-              ? [
-                  `${i - 1}:${j}`,
-                  `${i - 1}:${j - 1}`,
-                  `${i}:${j - 1}`,
-                  `${i + 1}:${j}`,
-                ]
-              : j % 2 === 0
-              ? [
-                  `${i}:${j - 1}`,
-                  `${i}:${j + 1}`,
-                  `${i - 1}:${j}`,
-                  `${i + 1}:${j}`,
-                  `${i + 1}:${j - 1}`,
-                  `${i + 1}:${j + 1}`,
-                ]
-              : [
-                  `${i}:${j - 1}`,
-                  `${i}:${j + 1}`,
-                  `${i - 1}:${j}`,
-                  `${i + 1}:${j}`,
-                  `${i - 1}:${j - 1}`,
-                  `${i - 1}:${j + 1}`,
-                ]
+                ? [`${i}:${j - 1}`, `${i + 1}:${j}`]
+                : i === this.rows && j === 1
+                  ? [`${i}:${j + 1}`, `${i - 1}:${j + 1}`, `${i - 1}:${j}`]
+                  : i === this.rows && j === this.columns
+                    ? [`${i}:${j - 1}`, `${i - 1}:${j - 1}`, `${i - 1}:${j}`]
+                    : i === 1
+                      ? j % 2 === 0
+                        ? [
+                          `${i}:${j - 1}`,
+                          `${i}:${j + 1}`,
+                          `${i + 1}:${j - 1}`,
+                          `${i + 1}:${j + 1}`,
+                          `${i + 1}:${j}`
+                        ]
+                        : [`${i}:${j - 1}`, `${i}:${j + 1}`, `${i + 1}:${j}`]
+                      : i === this.rows
+                        ? j % 2 === 0
+                          ? [`${i}:${j - 1}`, `${i}:${j + 1}`, `${i - 1}:${j}`]
+                          : [
+                            `${i}:${j - 1}`,
+                            `${i}:${j + 1}`,
+                            `${i - 1}:${j - 1}`,
+                            `${i - 1}:${j + 1}`,
+                            `${i - 1}:${j}`
+                          ]
+                        : j === 1
+                          ? [
+                            `${i - 1}:${j}`,
+                            `${i + 1}:${j}`,
+                            `${i}:${j + 1}`,
+                            `${i - 1}:${j + 1}`
+                          ]
+                          : j === this.columns
+                            ? [
+                              `${i - 1}:${j}`,
+                              `${i - 1}:${j - 1}`,
+                              `${i}:${j - 1}`,
+                              `${i + 1}:${j}`
+                            ]
+                            : j % 2 === 0
+                              ? [
+                                `${i}:${j - 1}`,
+                                `${i}:${j + 1}`,
+                                `${i - 1}:${j}`,
+                                `${i + 1}:${j}`,
+                                `${i + 1}:${j - 1}`,
+                                `${i + 1}:${j + 1}`
+                              ]
+                              : [
+                                `${i}:${j - 1}`,
+                                `${i}:${j + 1}`,
+                                `${i - 1}:${j}`,
+                                `${i + 1}:${j}`,
+                                `${i - 1}:${j - 1}`,
+                                `${i - 1}:${j + 1}`
+                              ]
           );
         }
       }
@@ -218,24 +216,24 @@ export default {
       }
     },
 
-    gameOver: function () {
+    gameOver: function() {
       if (this.$refs.frame.soundToggle) gameOverSound.play();
 
       const gameOverMessage =
         this.counter1 > this.counter2
           ? "Player 1 wins!"
           : this.counter1 < this.counter2
-          ? "Player 2 wins!"
-          : "It's a draw!";
+            ? "Player 2 wins!"
+            : "It's a draw!";
 
       this.triggerToast(gameOverMessage);
     },
 
-    triggerToast: function (msg) {
+    triggerToast: function(msg) {
       this.msg = msg;
       this.snackbar = true;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -252,15 +250,6 @@ export default {
 .status {
   padding: 0 2.5em;
   font-family: Hexa, serif;
-}
-
-.header {
-  font-size: 2rem;
-  display: flex;
-  align-content: center;
-  justify-content: space-between;
-  min-width: 50%;
-  margin-bottom: 2em;
 }
 
 .tileRow {
