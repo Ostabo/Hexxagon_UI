@@ -1,6 +1,6 @@
 <template>
   <div class="main-body h-100">
-    <nav class="navbar navbar-expand-sm navbar-dark border-bottom pb-2 fs-4">
+    <nav class="navbar navbar-expand-md navbar-dark border-bottom pb-2 fs-4">
       <div class="container">
         <RouterLink class="navbar-brand" to="/">
           <img
@@ -23,7 +23,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div id="n_bar" class="collapse navbar-collapse">
-          <ul class="navbar-nav nav-fill">
+          <ul class="navbar-nav nav-fill align-items-center">
             <li class="nav-item active">
               <RouterLink class="nav-link" to="/">
                 <font-awesome-icon class="mt-1" icon="wifi" size="1x">
@@ -63,12 +63,12 @@
               >
                 <li>
                   <RouterLink class="dropdown-item" to="/game-plain"
-                    >Game Plain
+                  >Game Plain
                   </RouterLink>
                 </li>
                 <li>
                   <RouterLink class="dropdown-item" to="/status-plain"
-                    >Game Status
+                  >Game Status
                   </RouterLink>
                 </li>
               </ul>
@@ -100,7 +100,7 @@
               <ChatPopup :disabled="chatToggle"></ChatPopup>
             </div>
           </div>
-          <div class="dropdown mr-3 my-1">
+          <div id="settings" class="dropdown mr-3 my-1">
             <button
               id="dropdownMenuButton"
               aria-expanded="false"
@@ -276,7 +276,7 @@ export default {
   data() {
     return {
       soundToggle: true,
-      chatToggle: true,
+      chatToggle: true
     };
   },
   methods: {
@@ -285,8 +285,8 @@ export default {
     },
     toggleChat() {
       this.chatToggle = !this.chatToggle;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -408,5 +408,11 @@ main textarea,
 
 #game-over {
   display: none;
+}
+
+#settings {
+  @media (max-width: 767px) {
+    margin-left: 12px;
+  }
 }
 </style>

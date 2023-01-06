@@ -24,7 +24,7 @@ export default defineConfig({
       ],
       manifest: {
         name: "Hexxagon",
-        short_name: "Hexxagon",
+        short_name: "Hex",
         start_url: "index.html",
         id: "hexxagon",
         icons: [
@@ -50,8 +50,8 @@ export default defineConfig({
             type: "image/png",
           },
         ],
-        theme_color: "#151515",
-        background_color: "#151515",
+        theme_color: "#000000",
+        background_color: "#000000",
         display: "standalone",
       },
     }),
