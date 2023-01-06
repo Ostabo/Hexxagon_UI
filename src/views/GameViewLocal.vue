@@ -35,7 +35,7 @@
   <SaveModal></SaveModal>
   <LoadModal></LoadModal>
 
-  <v-snackbar v-model="snackbar">
+  <v-snackbar v-model="snackbar" color="white">
     <font-awesome-icon
       class="mt-1 mx-lg-2 fs-2"
       icon="triangle-exclamation"
@@ -78,7 +78,7 @@ export default {
     ResetModal,
     WebFrame,
     PlayerStone,
-    HexTile,
+    HexTile
   },
   data() {
     return {
@@ -91,7 +91,7 @@ export default {
       hexField: new Map(),
       neighbors: new Map(),
       columns: 9,
-      rows: 6,
+      rows: 6
     };
   },
   beforeMount() {
@@ -107,62 +107,62 @@ export default {
             i === 1 && j === 1
               ? [`${i}:${j + 1}`, `${i + 1}:${j}`]
               : i === 1 && j === this.columns
-              ? [`${i}:${j - 1}`, `${i + 1}:${j}`]
-              : i === this.rows && j === 1
-              ? [`${i}:${j + 1}`, `${i - 1}:${j + 1}`, `${i - 1}:${j}`]
-              : i === this.rows && j === this.columns
-              ? [`${i}:${j - 1}`, `${i - 1}:${j - 1}`, `${i - 1}:${j}`]
-              : i === 1
-              ? j % 2 === 0
-                ? [
-                    `${i}:${j - 1}`,
-                    `${i}:${j + 1}`,
-                    `${i + 1}:${j - 1}`,
-                    `${i + 1}:${j + 1}`,
-                    `${i + 1}:${j}`,
-                  ]
-                : [`${i}:${j - 1}`, `${i}:${j + 1}`, `${i + 1}:${j}`]
-              : i === this.rows
-              ? j % 2 === 0
-                ? [`${i}:${j - 1}`, `${i}:${j + 1}`, `${i - 1}:${j}`]
-                : [
-                    `${i}:${j - 1}`,
-                    `${i}:${j + 1}`,
-                    `${i - 1}:${j - 1}`,
-                    `${i - 1}:${j + 1}`,
-                    `${i - 1}:${j}`,
-                  ]
-              : j === 1
-              ? [
-                  `${i - 1}:${j}`,
-                  `${i + 1}:${j}`,
-                  `${i}:${j + 1}`,
-                  `${i - 1}:${j + 1}`,
-                ]
-              : j === this.columns
-              ? [
-                  `${i - 1}:${j}`,
-                  `${i - 1}:${j - 1}`,
-                  `${i}:${j - 1}`,
-                  `${i + 1}:${j}`,
-                ]
-              : j % 2 === 0
-              ? [
-                  `${i}:${j - 1}`,
-                  `${i}:${j + 1}`,
-                  `${i - 1}:${j}`,
-                  `${i + 1}:${j}`,
-                  `${i + 1}:${j - 1}`,
-                  `${i + 1}:${j + 1}`,
-                ]
-              : [
-                  `${i}:${j - 1}`,
-                  `${i}:${j + 1}`,
-                  `${i - 1}:${j}`,
-                  `${i + 1}:${j}`,
-                  `${i - 1}:${j - 1}`,
-                  `${i - 1}:${j + 1}`,
-                ]
+                ? [`${i}:${j - 1}`, `${i + 1}:${j}`]
+                : i === this.rows && j === 1
+                  ? [`${i}:${j + 1}`, `${i - 1}:${j + 1}`, `${i - 1}:${j}`]
+                  : i === this.rows && j === this.columns
+                    ? [`${i}:${j - 1}`, `${i - 1}:${j - 1}`, `${i - 1}:${j}`]
+                    : i === 1
+                      ? j % 2 === 0
+                        ? [
+                          `${i}:${j - 1}`,
+                          `${i}:${j + 1}`,
+                          `${i + 1}:${j - 1}`,
+                          `${i + 1}:${j + 1}`,
+                          `${i + 1}:${j}`
+                        ]
+                        : [`${i}:${j - 1}`, `${i}:${j + 1}`, `${i + 1}:${j}`]
+                      : i === this.rows
+                        ? j % 2 === 0
+                          ? [`${i}:${j - 1}`, `${i}:${j + 1}`, `${i - 1}:${j}`]
+                          : [
+                            `${i}:${j - 1}`,
+                            `${i}:${j + 1}`,
+                            `${i - 1}:${j - 1}`,
+                            `${i - 1}:${j + 1}`,
+                            `${i - 1}:${j}`
+                          ]
+                        : j === 1
+                          ? [
+                            `${i - 1}:${j}`,
+                            `${i + 1}:${j}`,
+                            `${i}:${j + 1}`,
+                            `${i - 1}:${j + 1}`
+                          ]
+                          : j === this.columns
+                            ? [
+                              `${i - 1}:${j}`,
+                              `${i - 1}:${j - 1}`,
+                              `${i}:${j - 1}`,
+                              `${i + 1}:${j}`
+                            ]
+                            : j % 2 === 0
+                              ? [
+                                `${i}:${j - 1}`,
+                                `${i}:${j + 1}`,
+                                `${i - 1}:${j}`,
+                                `${i + 1}:${j}`,
+                                `${i + 1}:${j - 1}`,
+                                `${i + 1}:${j + 1}`
+                              ]
+                              : [
+                                `${i}:${j - 1}`,
+                                `${i}:${j + 1}`,
+                                `${i - 1}:${j}`,
+                                `${i + 1}:${j}`,
+                                `${i - 1}:${j - 1}`,
+                                `${i - 1}:${j + 1}`
+                              ]
           );
         }
       }
@@ -220,24 +220,24 @@ export default {
       }
     },
 
-    gameOver: function () {
+    gameOver: function() {
       if (this.$refs.frame.soundToggle) gameOverSound.play();
 
       const gameOverMessage =
         this.counter1 > this.counter2
           ? "Player 1 wins!"
           : this.counter1 < this.counter2
-          ? "Player 2 wins!"
-          : "It's a draw!";
+            ? "Player 2 wins!"
+            : "It's a draw!";
 
       this.triggerToast(gameOverMessage);
     },
 
-    triggerToast: function (msg) {
+    triggerToast: function(msg) {
       this.msg = msg;
       this.snackbar = true;
-    },
-  },
+    }
+  }
 };
 </script>
 
