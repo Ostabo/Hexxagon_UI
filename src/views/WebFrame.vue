@@ -362,7 +362,7 @@ main textarea,
     display: grid;
 
     min-width: 50%;
-    margin-bottom: 2em;
+    margin-bottom: 2.5rem;
 
     grid-auto-rows: 1fr 1fr;
 
@@ -384,7 +384,7 @@ main textarea,
     }
 
     .status {
-      padding: 0 1rem;
+      padding: 1.3rem;
       font-family: Hexa, serif;
     }
   }

@@ -55,7 +55,7 @@
                                   width="90"
                                 />
                               </div>
-                              <div class="flex-grow-1 ms-4 ps-3">
+                              <div class="flex-grow-1 m-4 ps-3">
                                 <figure>
                                   <blockquote class="blockquote mb-4">
                                     <p>
@@ -102,7 +102,7 @@
                                   width="90"
                                 />
                               </div>
-                              <div class="flex-grow-1 ms-4 ps-3">
+                              <div class="flex-grow-1 m-4 ps-3">
                                 <figure>
                                   <blockquote class="blockquote mb-4">
                                     <p>
@@ -167,7 +167,7 @@
       </section>
 
       <div class="text-start">
-        <div class="row p-lg-5">
+        <div class="row p-lg-5 gap-5">
           <div class="card col-md my-5 p-0">
             <h5 class="card-header">The Game</h5>
             <div class="card-body">

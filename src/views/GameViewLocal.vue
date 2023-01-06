@@ -1,7 +1,6 @@
 <template>
   <WebFrame ref="frame">
     <div class="container">
-      <h1 class="p-3">Welcome to Hexxagon!</h1>
       <div class="game-container">
         <div class="header">
           <h2 class="counter">
@@ -249,6 +248,8 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  margin-bottom: .7rem;
 }
 
 .tileRow {
