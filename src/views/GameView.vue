@@ -1,6 +1,6 @@
 <template>
   <WebFrame ref="frame">
-    <LoadingIcon v-if="loading"></LoadingIcon>
+    <LoadingIcon v-if="loading" :error="errorOnLoad"></LoadingIcon>
     <div v-else class="container">
       <h1 class="p-3">Welcome to Hexxagon!</h1>
       <div class="game-container">
@@ -91,7 +91,11 @@
     </span>
     <template v-slot:actions>
       <v-btn color="red" variant="text" @click="snackbar = false">
-        Close
+        <font-awesome-icon
+          class="m-lg-1"
+          icon="x"
+          size="1x"
+        ></font-awesome-icon>
       </v-btn>
     </template>
   </v-snackbar>
@@ -108,6 +112,7 @@ import { clickSound, errorSound, gameOverSound, SERVER_URL, SERVER_WS_URL } from
 import SaveModal from "@/components/SaveModal.vue";
 import LoadModal from "@/components/LoadModal.vue";
 import GameOverModal from "@/components/GameOverModal.vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 export const availableTurns = ["X", "O"];
 export const statusText = [
@@ -124,6 +129,7 @@ export const WS_KEEP_ALIVE_REQUEST = "ping";
 export default {
   name: "GameView",
   components: {
+    FontAwesomeIcon,
     GameOverModal,
     LoadModal,
     SaveModal,
@@ -137,6 +143,7 @@ export default {
     return {
       socket: undefined,
       loading: Boolean,
+      errorOnLoad: Boolean,
       counter1: "",
       counter2: "",
       gameStatus: "",
@@ -148,7 +155,11 @@ export default {
       winner: Number
     };
   },
+  errorCaptured() {
+    this.errorOnLoad = true;
+  },
   mounted() {
+    this.errorOnLoad = false;
     fetch(SERVER_URL + "/game", {
       method: "GET",
       headers: {
@@ -165,9 +176,11 @@ export default {
       .then((json) => {
         this.updateGame(json);
         this.loading = false;
+        this.errorOnLoad = false;
       })
       .catch((err) => {
         console.log(err);
+        this.errorOnLoad = true;
       });
 
     this.socket = new WebSocket(SERVER_WS_URL + "/ws");
@@ -201,11 +214,13 @@ export default {
         );
       } else {
         console.log("[close] Connection died");
+        this.errorOnLoad = true;
       }
     };
 
     this.socket.onerror = (error) => {
       console.error(`[error] ${error.message}`);
+      this.errorOnLoad = true;
     };
   },
   beforeUnmount() {
@@ -345,11 +360,6 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.status {
-  padding: 0 2.5em;
-  font-family: Hexa, serif;
 }
 
 .tileRow {

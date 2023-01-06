@@ -361,11 +361,34 @@ main textarea,
     white-space: nowrap;
 
     font-size: 2rem;
-    display: flex;
-    align-content: center;
-    justify-content: space-between;
+    display: grid;
+
     min-width: 50%;
     margin-bottom: 2em;
+
+    grid-auto-rows: 1fr 1fr;
+
+    & > .status {
+      grid-row: 1;
+      grid-column: 1 / 3;
+    }
+
+    & > .counter:nth-child(1) {
+      grid-column: 1;
+      grid-row: 2;
+      padding-right: 1em;
+    }
+
+    & > .counter:nth-child(2) {
+      grid-column: 2;
+      grid-row: 2;
+      padding-left: 1em;
+    }
+
+    .status {
+      padding: 0 1rem;
+      font-family: Hexa, serif;
+    }
   }
 
   textarea {

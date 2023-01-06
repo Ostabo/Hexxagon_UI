@@ -13,7 +13,7 @@
       <section class="m-lg-5 h-50 gradient-custom rounded-5">
         <div class="container-sm w-75 py-5">
           <div
-            class="row d-flex justify-content-center align-items-center h-100"
+            class="d-flex justify-content-center align-items-center h-100"
           >
             <div class="col col-xl-10">
               <div class="card h-25">
@@ -44,7 +44,7 @@
                     <div class="carousel-inner pt-2 pb-5">
                       <!-- Single item -->
                       <div class="carousel-item active">
-                        <div class="row d-flex justify-content-center">
+                        <div class="d-flex justify-content-center">
                           <div class="col-md-8 col-lg-9 col-xl-8">
                             <div class="d-flex">
                               <div class="flex-shrink-0">
@@ -92,7 +92,7 @@
 
                       <!-- Single item -->
                       <div class="carousel-item">
-                        <div class="row d-flex justify-content-center">
+                        <div class="d-flex justify-content-center">
                           <div class="col-md-8 col-lg-9 col-xl-8">
                             <div class="d-flex">
                               <div class="flex-shrink-0">
@@ -169,8 +169,8 @@
       </section>
 
       <div class="text-start">
-        <div class="row m-lg-5">
-          <div class="card col-md m-lg-5 p-0">
+        <div class="row p-lg-5">
+          <div class="card col-md m-5 p-0">
             <h5 class="card-header">The Game</h5>
             <div class="card-body">
               <p class="card-text">
@@ -187,7 +187,7 @@
               </p>
             </div>
           </div>
-          <div class="card col-lg m-lg-5 p-0">
+          <div class="card col-lg m-5 p-0">
             <h5 class="card-header">About</h5>
             <div class="card-body">
               <p class="card-text">
@@ -198,8 +198,8 @@
           </div>
         </div>
 
-        <div class="row d-flex justify-content-center">
-          <div class="card mb-lg-5 img-card p-0">
+        <div class="d-flex justify-content-center">
+          <div class="card mb-5 img-card p-0">
             <h5 class="card-header">How To</h5>
             <div class="card-body">
               <img
@@ -220,7 +220,7 @@ import WebFrame from "@/views/WebFrame.vue";
 
 export default {
   name: "AboutPage",
-  components: { WebFrame },
+  components: { WebFrame }
 };
 </script>
 
@@ -229,10 +229,11 @@ export default {
   color: white;
   text-align: center;
   font-size: 1.45vw;
+  padding-top: 2rem;
 }
 
 .img-card {
-  width: 35%;
+  width: 40%;
 }
 
 .yellow {

@@ -46,6 +46,7 @@ import {
   faWifi,
   faX,
   faRefresh,
+  faBoltLightning,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
@@ -69,6 +70,7 @@ library.add(faPaperPlane);
 library.add(faWifi);
 library.add(faX);
 library.add(faRefresh);
+library.add(faBoltLightning);
 
 const [cS, eS] = [
   import.meta.env.BASE_URL + "/click-good.wav",

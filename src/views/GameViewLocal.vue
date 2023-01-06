@@ -47,7 +47,11 @@
     </span>
     <template v-slot:actions>
       <v-btn color="red" variant="text" @click="snackbar = false">
-        Close
+        <font-awesome-icon
+          class="m-lg-1"
+          icon="x"
+          size="1x"
+        ></font-awesome-icon>
       </v-btn>
     </template>
   </v-snackbar>
@@ -245,11 +249,6 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.status {
-  padding: 0 2.5em;
-  font-family: Hexa, serif;
 }
 
 .tileRow {
