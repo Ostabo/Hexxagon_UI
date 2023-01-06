@@ -1,7 +1,17 @@
 <template>
   <div class="loading">
-    <font-awesome-icon v-if="!error" :size="'10x'" :spin="true" icon="fa-solid fa-spinner" />
-    <font-awesome-icon v-else-if="error" :size="'10x'" class="fa-fade" icon="fa-solid fa-bolt-lightning" />
+    <font-awesome-icon
+      v-if="!error"
+      :size="'10x'"
+      :spin="true"
+      icon="fa-solid fa-spinner"
+    />
+    <font-awesome-icon
+      v-else-if="error"
+      :size="'10x'"
+      class="fa-fade"
+      icon="fa-solid fa-bolt-lightning"
+    />
   </div>
 </template>
 
@@ -14,9 +24,9 @@ export default {
   props: {
     error: {
       type: Boolean,
-      default: false
-    }
-  }
+      default: false,
+    },
+  },
 };
 </script>
 

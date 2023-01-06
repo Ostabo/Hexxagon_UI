@@ -12,9 +12,7 @@
 
       <section class="m-lg-5 h-50 gradient-custom rounded-5">
         <div class="container-sm w-75 py-5">
-          <div
-            class="d-flex justify-content-center align-items-center h-100"
-          >
+          <div class="d-flex justify-content-center align-items-center h-100">
             <div class="col col-xl-10">
               <div class="card h-25">
                 <div class="card-body py-5">
@@ -170,7 +168,7 @@
 
       <div class="text-start">
         <div class="row p-lg-5">
-          <div class="card col-md m-5 p-0">
+          <div class="card col-md my-5 p-0">
             <h5 class="card-header">The Game</h5>
             <div class="card-body">
               <p class="card-text">
@@ -187,7 +185,7 @@
               </p>
             </div>
           </div>
-          <div class="card col-lg m-5 p-0">
+          <div class="card col-lg my-5 p-0">
             <h5 class="card-header">About</h5>
             <div class="card-body">
               <p class="card-text">
