@@ -19,8 +19,8 @@ export default {
       return this.player === "X"
         ? "blue"
         : this.player === "O"
-        ? "red"
-        : "white";
+          ? "red"
+          : "white";
     },
   },
 };
@@ -31,8 +31,14 @@ export default {
 
 .stone img {
   width: 6vmin;
-  margin: 0 0 5px 2px;
   object-fit: contain;
   filter: drop-shadow(0 0 1px $color-darker);
+
+  @media (max-width: 600px) {
+    margin: 0 0 1px 1px;
+  }
+  @media (min-width: 600px) {
+    margin: 0 0 5px 2px;
+  }
 }
 </style>
