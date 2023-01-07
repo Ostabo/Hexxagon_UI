@@ -9,9 +9,9 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 id="loadModalLabel" class="modal-title fs-5">Success</h1>
+          <h1 id="saveModalLabel" aria-label="Save Modal" class="modal-title fs-5">Success</h1>
           <button
-            aria-label="Close"
+            aria-label="Close Save"
             class="btn-close"
             data-bs-dismiss="modal"
             type="button"
@@ -32,10 +32,10 @@ import { apiPost } from "@/assets/api";
 export default {
   name: "SaveModal",
   methods: {
-    save: function () {
+    save: function() {
       apiPost("save");
-    },
-  },
+    }
+  }
 };
 </script>
 

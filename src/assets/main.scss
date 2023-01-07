@@ -10,21 +10,26 @@ $color-disabled: #9d9d9d;
 $color-dark: #333333;
 $color-darker: #222222;
 $color-background: linear-gradient(
-  $color-darker 0%,
-  $color-dark 50%,
-  $color-dark 100%
+                $color-darker 0%,
+                $color-dark 50%,
+                $color-dark 100%
 );
 
 body {
   width: 100vw;
   height: 100vh;
   margin: 0;
-  background: $color-background;
+  background-image: url("@/assets/images/background-universe.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 
   font-family: Hexa, serif;
 }
 
 @font-face {
-  font-family: "Hexa";
+  font-family: Hexa;
   src: local("Hexa"), url(../assets/Hexa.ttf) format("truetype");
+
+  font-display: swap;
 }

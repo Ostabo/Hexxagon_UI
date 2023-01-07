@@ -88,6 +88,7 @@
               id="dropdownChat"
               aria-expanded="false"
               aria-haspopup="true"
+              aria-label="Chat"
               class="btn btn-transparent dropdown-toggle text-light"
               data-bs-toggle="dropdown"
               data-toggle="dropdown"
@@ -105,6 +106,7 @@
               id="dropdownMenuButton"
               aria-expanded="false"
               aria-haspopup="true"
+              aria-label="Settings"
               class="btn btn-outline-light dropdown-toggle"
               data-bs-toggle="dropdown"
               data-toggle="dropdown"
@@ -144,13 +146,6 @@
       </div>
     </nav>
 
-    <!-- preload image -->
-    <img
-      alt=""
-      class="img-responsive"
-      src="@/assets/images/background-universe.jpg"
-    />
-
     <!-- content -->
     <slot></slot>
 
@@ -166,7 +161,7 @@
               class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"
               href="https://github.com/Ostabo/Hexxagon-WA"
             >
-              <img alt="" height="30" src="@/assets/images/github.png" />
+              <img alt="Github" height="30" src="@/assets/images/github.png" />
             </a>
             <span class="m-3">2022 Hexxagon - AIN</span>
             <a
@@ -391,10 +386,8 @@ main textarea,
 
   textarea {
     display: block;
-    min-width: 740px;
     height: 740px;
 
-    font-size: 1.8em;
     text-align: left;
     padding: 1em;
     border: none;
@@ -403,6 +396,15 @@ main textarea,
 
     font-family: revert;
     line-height: initial;
+
+    @media (min-width: 767px) {
+      font-size: 1.8em;
+      min-width: 740px;
+    }
+    @media (max-width: 767px) {
+      font-size: .8em;
+      min-width: 320px;
+    }
   }
 }
 

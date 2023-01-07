@@ -1,7 +1,7 @@
 <template>
   <WebFrame>
     <main>
-      <textarea v-model="status" class="textfield" disabled> </textarea>
+      <textarea v-model="status" class="textfield text-center" disabled> </textarea>
     </main>
   </WebFrame>
 </template>
@@ -15,7 +15,7 @@ export default {
   components: { WebFrame },
   data() {
     return {
-      status: "",
+      status: ""
     };
   },
   mounted() {
@@ -31,7 +31,7 @@ export default {
       .catch((err) => {
         this.status = err;
       });
-  },
+  }
 };
 </script>
 

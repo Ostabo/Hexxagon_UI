@@ -1,5 +1,5 @@
 <template>
-  <span class="stone">
+  <span ref="stone" class="stone">
     <img v-if="player === 'X'" alt="X" src="@/assets/images/gem-blue.png" />
     <img v-if="player === 'O'" alt="O" src="@/assets/images/gem-red.png" />
   </span>
@@ -11,8 +11,15 @@ export default {
   props: {
     player: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
+  },
+  watch: {
+    player: function(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.triggerAnimation();
+      }
+    }
   },
   computed: {
     color() {
@@ -21,13 +28,25 @@ export default {
         : this.player === "O"
           ? "red"
           : "white";
-    },
+    }
   },
+  methods: {
+    triggerAnimation() {
+      this.$refs.stone.classList.add("changeStone");
+      setTimeout(() => {
+        this.$refs.stone.classList.remove("changeStone");
+      }, 750);
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../assets/main.scss";
+
+.stone:is(.changeStone) img {
+  animation: changeStone .75s;
+}
 
 .stone img {
   width: 6vmin;
@@ -39,6 +58,18 @@ export default {
   }
   @media (min-width: 600px) {
     margin: 0 0 5px 2px;
+  }
+}
+
+@keyframes changeStone {
+  0% {
+    transform: rotateY(0deg) scale(1);
+  }
+  50% {
+    transform: rotateY(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotateY(360deg) scale(1);
   }
 }
 </style>
