@@ -26,7 +26,18 @@ export default defineConfig({
         name: "Hexxagon",
         short_name: "Hex",
         start_url: "index.html",
+        description:
+          "Hexxagon Game for Web-Application Project @ HTWG - 2022/23",
         id: "hexxagon",
+        orientation: "any",
+        shortcuts: [],
+        dir: "ltr",
+        prefer_related_applications: false,
+        related_applications: [],
+        categories: ["games", "strategy", "casual", "online"],
+        iarc_rating_id: "",
+        share_target: {},
+        display_override: [],
         icons: [
           {
             src: "/Hexxagon_UI/android-chrome-192x192.png",
@@ -42,7 +53,13 @@ export default defineConfig({
             src: "/Hexxagon_UI/android-chrome-512x512.png",
             sizes: "512x512",
             type: "image/png",
-            purpose: "any maskable",
+            purpose: "any",
+          },
+          {
+            src: "/Hexxagon_UI/mstile-310x310.png",
+            sizes: "310x310",
+            type: "image/png",
+            purpose: "maskable",
           },
           {
             src: "/Hexxagon_UI/apple-touch-icon.png",
