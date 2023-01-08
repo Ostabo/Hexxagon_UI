@@ -35,9 +35,10 @@ export default defineConfig({
         prefer_related_applications: false,
         related_applications: [],
         categories: ["games", "strategy", "casual", "online"],
-        iarc_rating_id: "",
+        iarc_rating_id: "none",
         share_target: {},
         display_override: [],
+        screenshots: ["/Hexxagon_UI/screen_game.png"],
         icons: [
           {
             src: "/Hexxagon_UI/android-chrome-192x192.png",
