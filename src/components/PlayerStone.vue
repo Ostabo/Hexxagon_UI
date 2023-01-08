@@ -14,6 +14,11 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      timer: null
+    };
+  },
   watch: {
     player: function(newVal, oldVal) {
       if (newVal !== oldVal) {
@@ -32,8 +37,12 @@ export default {
   },
   methods: {
     triggerAnimation() {
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+      this.$refs.stone.classList.remove("changeStone");
       this.$refs.stone.classList.add("changeStone");
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.$refs.stone.classList.remove("changeStone");
       }, 750);
     }
