@@ -57,14 +57,19 @@ export default {
   animation: changeStone .75s;
 }
 
+.stone {
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
 .stone img {
   width: 6vmin;
   object-fit: contain;
   filter: drop-shadow(0 0 1px $color-darker);
   -webkit-user-select: none;
   user-select: none;
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
 
   @media (max-width: 600px) {
     margin: 0 0 1px 1px;
