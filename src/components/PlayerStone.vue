@@ -62,6 +62,8 @@ export default {
   object-fit: contain;
   filter: drop-shadow(0 0 1px $color-darker);
   user-select: none;
+  transform: translateZ(100px);
+  transform-style: preserve-3d;
 
   @media (max-width: 600px) {
     margin: 0 0 1px 1px;
