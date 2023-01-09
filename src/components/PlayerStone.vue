@@ -62,8 +62,6 @@ export default {
   object-fit: contain;
   filter: drop-shadow(0 0 1px $color-darker);
   user-select: none;
-  transform: translateZ(100px);
-  transform-style: preserve-3d;
 
   @media (max-width: 600px) {
     margin: 0 0 1px 1px;
@@ -75,12 +73,15 @@ export default {
 
 @keyframes changeStone {
   0% {
+    -webkit-transform: rotateY(0deg) scale(1);
     transform: rotateY(0deg) scale(1);
   }
   50% {
+    -webkit-transform: rotateY(180deg) scale(1.2);
     transform: rotateY(180deg) scale(1.2);
   }
   100% {
+    -webkit-transform: rotateY(360deg) scale(1);
     transform: rotateY(360deg) scale(1);
   }
 }
