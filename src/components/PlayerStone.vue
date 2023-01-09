@@ -60,8 +60,6 @@ export default {
 .stone {
   -webkit-perspective: 1000px;
   perspective: 1000px;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
 }
 
 .stone img {
@@ -70,6 +68,7 @@ export default {
   filter: drop-shadow(0 0 1px $color-darker);
   -webkit-user-select: none;
   user-select: none;
+  z-index: 1;
 
   @media (max-width: 600px) {
     margin: 0 0 1px 1px;
