@@ -1,0 +1,1 @@
+import{S as e}from"./index.ee06de05.js";function o(t){return fetch(`${e}/`+t,{method:"POST",headers:{Accept:"application/json, text/plain, */*","Content-Type":"application/json"},body:""})}function a(t){return fetch(`${e}/`+t,{method:"GET",headers:{Accept:"application/json, text/plain, */*","Content-Type":"application/json"}})}export{o as a,a as b};

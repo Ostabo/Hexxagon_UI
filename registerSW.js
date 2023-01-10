@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/Hexxagon_UI/sw.js', { scope: '/Hexxagon_UI/' })})}
