@@ -53,32 +53,6 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/main.scss";
 
-.stone:is(.changeStone) img {
-  -webkit-animation: changeStone 0.75s;
-  animation: changeStone 0.75s;
-}
-
-.stone {
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-}
-
-.stone img {
-  width: 6vmin;
-  object-fit: contain;
-  filter: drop-shadow(0 0 1px $color-darker);
-  -webkit-user-select: none;
-  user-select: none;
-  z-index: 1;
-
-  @media (max-width: 600px) {
-    margin: 0 0 1px 1px;
-  }
-  @media (min-width: 600px) {
-    margin: 0 0 5px 2px;
-  }
-}
-
 @keyframes changeStone {
   0% {
     rotate: y 0deg;
@@ -93,4 +67,28 @@ export default {
     scale: 1;
   }
 }
+
+.stone:is(.changeStone) img {
+  animation: changeStone 0.75s;
+}
+
+.stone {
+  perspective: 1000px;
+}
+
+.stone img {
+  width: 6vmin;
+  object-fit: contain;
+  filter: drop-shadow(0 0 1px $color-darker);
+  -webkit-user-select: none;
+  user-select: none;
+
+  @media (max-width: 600px) {
+    margin: 0 0 1px 1px;
+  }
+  @media (min-width: 600px) {
+    margin: 0 0 5px 2px;
+  }
+}
+
 </style>
