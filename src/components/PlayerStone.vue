@@ -1,7 +1,7 @@
 <template>
   <span ref="stone" class="stone">
-    <img v-if="player === 'X'" alt="X" src="@/assets/images/gem-blue.png" />
-    <img v-if="player === 'O'" alt="O" src="@/assets/images/gem-red.png" />
+    <img v-if="player === 'X'" alt="X" src="@/assets/images/gem-blue.png"/>
+    <img v-if="player === 'O'" alt="O" src="@/assets/images/gem-red.png"/>
   </span>
 </template>
 
@@ -29,10 +29,10 @@ export default {
   computed: {
     color() {
       return this.player === "X"
-        ? "blue"
-        : this.player === "O"
-        ? "red"
-        : "white";
+          ? "blue"
+          : this.player === "O"
+              ? "red"
+              : "white";
     },
   },
   methods: {
@@ -54,6 +54,7 @@ export default {
 @import "../assets/main.scss";
 
 .stone:is(.changeStone) img {
+  -webkit-animation: changeStone 0.75s;
   animation: changeStone 0.75s;
 }
 
