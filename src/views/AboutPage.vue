@@ -218,7 +218,7 @@ import WebFrame from "@/views/WebFrame.vue";
 
 export default {
   name: "AboutPage",
-  components: { WebFrame }
+  components: { WebFrame },
 };
 </script>
 
