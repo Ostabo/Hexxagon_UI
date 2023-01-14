@@ -1,26 +1,26 @@
 <template>
   <div class="hex" v-bind:class="hasStone() ? '' : 'hoverable'">
-    <Stone :player="stone"></Stone>
+    <PlayerStone :player="stone"></PlayerStone>
   </div>
 </template>
 
 <script>
-import Stone from "@/components/PlayerStone.vue";
+import PlayerStone from "@/components/PlayerStone.vue";
 
 export default {
   name: "HexTile",
-  components: { Stone },
+  components: { PlayerStone },
   props: {
     stone: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   methods: {
     hasStone() {
       return this.stone === "X" || this.stone === "O";
-    },
-  },
+    }
+  }
 };
 </script>
 
