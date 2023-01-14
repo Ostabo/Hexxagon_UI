@@ -9,7 +9,13 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 id="loadModalLabel" aria-label="Load Modal" class="modal-title fs-5">Are you sure?</h1>
+          <h1
+            id="loadModalLabel"
+            aria-label="Load Modal"
+            class="modal-title fs-5"
+          >
+            Are you sure?
+          </h1>
           <button
             aria-label="Close Load"
             class="btn-close"
@@ -48,12 +54,12 @@ import { apiPost } from "@/assets/api";
 export default {
   name: "LoadModal",
   methods: {
-    load: function() {
+    load: function () {
       apiPost("load").then(() => {
         window.location.reload();
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -63,12 +63,12 @@
               >
                 <li>
                   <RouterLink class="dropdown-item" to="/game-plain"
-                  >Game Plain
+                    >Game Plain
                   </RouterLink>
                 </li>
                 <li>
                   <RouterLink class="dropdown-item" to="/status-plain"
-                  >Game Status
+                    >Game Status
                   </RouterLink>
                 </li>
               </ul>
@@ -271,7 +271,7 @@ export default {
   data() {
     return {
       soundToggle: true,
-      chatToggle: true
+      chatToggle: true,
     };
   },
   methods: {
@@ -280,8 +280,8 @@ export default {
     },
     toggleChat() {
       this.chatToggle = !this.chatToggle;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -402,7 +402,7 @@ main textarea,
       min-width: 740px;
     }
     @media (max-width: 767px) {
-      font-size: .8em;
+      font-size: 0.8em;
       min-width: 320px;
     }
   }

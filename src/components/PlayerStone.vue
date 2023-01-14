@@ -1,7 +1,7 @@
 <template>
   <span ref="stone" class="stone">
-    <img v-if="player === 'X'" alt="X" src="@/assets/images/gem-blue.png" />
-    <img v-if="player === 'O'" alt="O" src="@/assets/images/gem-red.png" />
+    <img v-if="player === 'X'" alt="X" src="@/assets/images/gem-blue.png"/>
+    <img v-if="player === 'O'" alt="O" src="@/assets/images/gem-red.png"/>
   </span>
 </template>
 
@@ -11,29 +11,29 @@ export default {
   props: {
     player: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      timer: null
+      timer: null,
     };
   },
   watch: {
-    player: function(newVal, oldVal) {
+    player: function (newVal, oldVal) {
       if (newVal !== oldVal) {
         this.triggerAnimation();
       }
-    }
+    },
   },
   computed: {
     color() {
       return this.player === "X"
-        ? "blue"
-        : this.player === "O"
-          ? "red"
-          : "white";
-    }
+          ? "blue"
+          : this.player === "O"
+              ? "red"
+              : "white";
+    },
   },
   methods: {
     triggerAnimation() {
@@ -45,38 +45,13 @@ export default {
       this.timer = setTimeout(() => {
         this.$refs.stone.classList.remove("changeStone");
       }, 750);
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../assets/main.scss";
-
-.stone:is(.changeStone) img {
-  animation: changeStone .75s;
-}
-
-.stone {
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-}
-
-.stone img {
-  width: 6vmin;
-  object-fit: contain;
-  filter: drop-shadow(0 0 1px $color-darker);
-  -webkit-user-select: none;
-  user-select: none;
-  z-index: 1;
-
-  @media (max-width: 600px) {
-    margin: 0 0 1px 1px;
-  }
-  @media (min-width: 600px) {
-    margin: 0 0 5px 2px;
-  }
-}
 
 @keyframes changeStone {
   0% {
@@ -92,4 +67,28 @@ export default {
     scale: 1;
   }
 }
+
+.stone:is(.changeStone) img {
+  animation: changeStone 0.75s;
+}
+
+.stone {
+  perspective: 1000px;
+}
+
+.stone img {
+  width: 6vmin;
+  object-fit: contain;
+  filter: drop-shadow(0 0 1px $color-darker);
+  -webkit-user-select: none;
+  user-select: none;
+
+  @media (max-width: 600px) {
+    margin: 0 0 1px 1px;
+  }
+  @media (min-width: 600px) {
+    margin: 0 0 5px 2px;
+  }
+}
+
 </style>
