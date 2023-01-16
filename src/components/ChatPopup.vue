@@ -54,15 +54,15 @@ export default {
   components: { FontAwesomeIcon },
   data() {
     return {
-      spin: false,
+      spin: false
     };
   },
   props: {
     disabled: {
       type: Boolean,
       required: false,
-      default: false,
-    },
+      default: false
+    }
   },
   watch: {
     disabled: {
@@ -71,8 +71,8 @@ export default {
           this.initChat();
         }
       },
-      immediate: true,
-    },
+      immediate: true
+    }
   },
   mounted() {
     this.initChat();
@@ -120,7 +120,7 @@ export default {
 
       axios
         .post(SERVER_URL + "/chat", {
-          message: msg,
+          message: msg
         })
         .then((response) => {
           if (response.status === 200) {
@@ -153,18 +153,18 @@ export default {
 
       let msgText = document.createElement("div");
       msgText.classList.add("text-left");
-      msgText.innerHTML = msg;
+      msgText.innerText = msg;
 
       let msgTime = document.createElement("div");
       msgTime.classList.add("text-right", "text-muted");
-      msgTime.innerHTML = timestamp;
+      msgTime.innerText = timestamp;
 
       message.appendChild(msgText);
       message.appendChild(msgTime);
 
       chatbox.append(message);
-    },
-  },
+    }
+  }
 };
 </script>
 
